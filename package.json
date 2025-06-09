@@ -8,7 +8,9 @@
 		"start": "next start",
 		"lint": "next lint",
 		"lint:fix": "pnpm run lint --fix",
-		"prettier:fix": "pnpm prettier -w src",
+		"prettier:check": "pnpm prettier -c src",
+		"prettier:fix": "pnpm prettier -c -w src",
+		"lint_format:check": "pnpm prettier:check && pnpm lint",
 		"format": "pnpm run prettier:fix && pnpm run lint:fix"
 	},
 	"dependencies": {
