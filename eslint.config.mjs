@@ -2,6 +2,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
 import stylistic from '@stylistic/eslint-plugin'
+import prettier from 'eslint-plugin-prettier'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -16,6 +17,7 @@ const eslintConfig = [
 		files: ['**/*.ts', '**/*.tsx'],
 		plugins: {
 			'@stylistic': stylistic,
+			prettier: prettier,
 		},
 
 		languageOptions: {
@@ -24,8 +26,7 @@ const eslintConfig = [
 			},
 		},
 		rules: {
-			'@stylistic/semi': ['error', 'never'],
-			'@stylistic/quotes': ['error', 'single'],
+			'prettier/prettier': 'error',
 		},
 	},
 ]
