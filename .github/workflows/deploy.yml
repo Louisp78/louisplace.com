@@ -8,11 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows/reusable/project-setup.yml
+      - uses: ./.github/actions/project-setup
 
       - name: Execute remote SSH commands using SSH key
         uses: appleboy/ssh-action@v1
@@ -21,4 +21,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: whoami
+          script_path: './deploy.sh'
