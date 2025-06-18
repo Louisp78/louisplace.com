@@ -1,6 +1,6 @@
 #! /bin/sh
 # shellcheck source=/dev/null
-. /home/louisplace-app/.bashrc
+. /home/louisplace-app/.profile
 cd /var/www/louisplace.com || exit 1 &&
 git pull origin main &&
 pnpm install &&
