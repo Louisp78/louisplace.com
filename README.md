@@ -1,3 +1,4 @@
+[![Deploy](https://github.com/Louisp78/louisplace.com/actions/workflows/deploy.yml/badge.svg)](https://github.com/Louisp78/louisplace.com/actions/workflows/deploy.yml)
 This is a [Next.js](https://nextjs.org) project.
 ## Getting Started
 First, run the development server:
