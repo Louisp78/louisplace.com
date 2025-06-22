@@ -12,7 +12,7 @@ export default async function BlogHomePage() {
 			onlyFiles: true,
 		})
 		const metadataList = postList.map((pathFile) => {
-			const source = fs.readFileSync(pathFile, 'utf-8')
+			const source = fs.readFileSync(pathFile)
 			const { data } = matter(source)
 			return data as Metadata
 		})
@@ -22,13 +22,16 @@ export default async function BlogHomePage() {
 		return metadataList
 	}
 
-	const postMetadataList = await getPostsMetadata()
+	const postMetadaList = await getPostsMetadata()
 	return (
-		<div className="overflow-y-scroll p-5">
+		<div className="overflow-y-auto p-5">
 			<main>
-				<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Blog</h1>
+				<div className="flex justify-between">
+					<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Blog</h1>
+					<button className="btn-primary">Work with me 📱</button>
+				</div>
 				<ul className="grid grid-cols-1 gap-3 overflow-visible pt-5 sm:grid-cols-2 lg:grid-cols-3">
-					{postMetadataList.map((metadata: Metadata) => (
+					{postMetadaList.map((metadata: Metadata) => (
 						<li key={metadata.slug}>
 							<PostCard
 								title={metadata.title}
