@@ -26,6 +26,7 @@ const eslintConfig = [
 			},
 		},
 		rules: {
+			'no-console': 'error',
 			'prettier/prettier': 'error',
 		},
 	},

@@ -1,26 +1,44 @@
 import PostCard from '@/components/post-card/PostCard'
+import { Metadata } from '@/types/metadata'
+import { globby } from 'globby'
+import fs from 'fs'
+import matter from 'gray-matter'
+import { addDays } from '@/utils/date'
 
-export default function BlogHomePage() {
+export default async function BlogHomePage() {
+	async function getPostsMetadata(): Promise<Metadata[]> {
+		const postList = await globby('src/posts/**/*.mdx', {
+			absolute: true,
+			onlyFiles: true,
+		})
+		const metadataList = postList.map((pathFile) => {
+			const source = fs.readFileSync(pathFile, 'utf-8')
+			const { data } = matter(source)
+			return data as Metadata
+		})
+		metadataList.sort((a, b) => {
+			return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+		})
+		return metadataList
+	}
+
+	const postMetadataList = await getPostsMetadata()
 	return (
 		<div className="overflow-y-scroll p-5">
 			<main>
 				<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Blog</h1>
-				<ul className="flex flex-col gap-3 overflow-visible pt-5">
-					<li>
-						<PostCard new />
-					</li>
-					<li>
-						<PostCard />
-					</li>
-					<li>
-						<PostCard />
-					</li>
-					<li>
-						<PostCard />
-					</li>
-					<li>
-						<PostCard />
-					</li>
+				<ul className="grid grid-cols-1 gap-3 overflow-visible pt-5 sm:grid-cols-2 lg:grid-cols-3">
+					{postMetadataList.map((metadata: Metadata) => (
+						<li key={metadata.slug}>
+							<PostCard
+								title={metadata.title}
+								imageHref={metadata.image}
+								description={metadata.summary}
+								new={new Date(metadata.publishedAt) > addDays(new Date(), -7)}
+								slug={metadata.slug}
+							/>
+						</li>
+					))}
 				</ul>
 			</main>
 		</div>

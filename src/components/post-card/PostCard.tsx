@@ -1,30 +1,37 @@
 import Image from 'next/image'
+import { TransitionLink } from '@/components/transition-link/TransitionLink'
 
-export default function PostCard(props: { new?: boolean }) {
+export interface PostCardProps {
+	new?: boolean
+	imageHref: string
+	description: string
+	title: string
+	slug: string
+}
+
+export default function PostCard(props: PostCardProps) {
 	return (
-		<div className="relative">
-			{props.new && (
-				<div className="absolute -top-4 -left-3 w-fit rounded-4xl border-2 border-amber-900 bg-amber-300 px-2 py-0.5 text-amber-900">
-					New Post
-				</div>
-			)}
-			<article className="rounded-xl border-2 border-gray-500 p-3">
-				<Image
-					src="/expo-and-native.png"
-					width={500}
-					height={500}
-					alt="Coupling React Native Expo and native mobile development are the true way to unlock true power of mobile engineering."
-					className="rounded-xl"
-				/>
-				<h2 className="font-[Syne] text-2xl font-semibold">
-					Expo + Natif : Une bromance innatendue
-				</h2>
-				<p className="line-clamp-3 overflow-hidden pt-4 text-ellipsis">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ullam est aperiam eius
-					asperiores ipsam quam alias, quaerat pariatur consectetur nostrum, in error quidem, rerum
-					placeat iusto perspiciatis maxime dolore.
-				</p>
-			</article>
-		</div>
+		<TransitionLink href={'/posts/' + props.slug}>
+			<div className="relative transition-transform duration-200 ease-in-out hover:scale-[1.01]">
+				{props.new && (
+					<div className="absolute -top-4 -right-3 w-fit rounded-4xl border-2 border-amber-900 bg-amber-300 px-2 py-0.5 text-amber-900">
+						New Post
+					</div>
+				)}
+				<article className="h-[500px] rounded-xl border-2 border-gray-500 p-3">
+					<div className="h-[300px] max-h-[300px] pb-4">
+						<Image
+							src={props.imageHref}
+							width={500}
+							height={300}
+							alt="Coupling React Native Expo and native mobile development are the true way to unlock true power of mobile engineering."
+							className="h-full w-full rounded-xl object-cover"
+						/>
+					</div>
+					<h2 className="pb-2 font-[Syne] text-2xl font-semibold">{props.title}</h2>
+					<p className="line-clamp-3 overflow-hidden text-ellipsis">{props.description}</p>
+				</article>
+			</div>
+		</TransitionLink>
 	)
 }
