@@ -14,13 +14,9 @@
 		"format": "pnpm run prettier:fix && pnpm run lint:fix"
 	},
 	"dependencies": {
-		"@mdx-js/loader": "^3.1.0",
-		"@mdx-js/react": "^3.1.0",
-		"@next/mdx": "^15.3.4",
-		"@types/mdx": "^2.0.13",
 		"globby": "^14.1.0",
-		"gray-matter": "^4.0.3",
 		"next": "15.3.3",
+		"next-mdx-remote": "^5.0.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	},
@@ -28,6 +24,7 @@
 		"@eslint/eslintrc": "^3",
 		"@stylistic/eslint-plugin": "^4.4.1",
 		"@tailwindcss/postcss": "^4",
+		"@tailwindcss/typography": "^0.5.16",
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
@@ -35,6 +32,7 @@
 		"eslint": "^9",
 		"eslint-config-next": "15.3.3",
 		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-mdx": "^3.5.0",
 		"eslint-plugin-prettier": "^5.4.1",
 		"prettier": "3.5.3",
 		"prettier-plugin-tailwindcss": "^0.6.12",

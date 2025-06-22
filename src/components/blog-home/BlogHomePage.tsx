@@ -2,8 +2,8 @@ import PostCard from '@/components/post-card/PostCard'
 import { Metadata } from '@/types/metadata'
 import { globby } from 'globby'
 import fs from 'fs'
-import matter from 'gray-matter'
 import { addDays } from '@/utils/date'
+import { compileMDX } from 'next-mdx-remote/rsc'
 
 export default async function BlogHomePage() {
 	async function getPostsMetadata(): Promise<Metadata[]> {
@@ -11,11 +11,19 @@ export default async function BlogHomePage() {
 			absolute: true,
 			onlyFiles: true,
 		})
-		const metadataList = postList.map((pathFile) => {
-			const source = fs.readFileSync(pathFile)
-			const { data } = matter(source)
-			return data as Metadata
-		})
+		const metadataList = await Promise.all(
+			postList.map(async (pathFile) => {
+				const source = fs.readFileSync(pathFile)
+				const { frontmatter } = await compileMDX<Metadata>({
+					source,
+					options: { parseFrontmatter: true },
+					components: {
+						PostCard,
+					},
+				})
+				return frontmatter as Metadata
+			})
+		)
 		metadataList.sort((a, b) => {
 			return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
 		})
