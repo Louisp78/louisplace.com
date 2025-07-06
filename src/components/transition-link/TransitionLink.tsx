@@ -14,7 +14,6 @@ export function TransitionLink({ children, href, ...props }: TransitionLinkProps
 	async function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
 		event.preventDefault()
 
-		// get the body component
 		const body = document.querySelector('body')
 		body?.classList.add('page-transition')
 		await new Promise((resolve) => setTimeout(resolve, 500))

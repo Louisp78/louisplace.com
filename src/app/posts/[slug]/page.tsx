@@ -20,7 +20,9 @@ export function CustomH1({ children }: { children: React.ReactNode }) {
 				<ChevronLeft />
 			</Link>
 			<div className="mt-10 mb-6 flex w-full flex-col items-center gap-3 pr-6 pl-6">
-				<h1 className="text-4xl font-bold text-gray-900 dark:text-white">{children}</h1>
+				<h1 className="text-center text-4xl font-bold text-gray-900 md:text-left dark:text-white">
+					{children}
+				</h1>
 				<hr className="mt-0 h-0.5 w-full rounded border-0 bg-gray-700 opacity-60" />
 			</div>
 		</>
