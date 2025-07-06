@@ -35,8 +35,7 @@ export default async function BlogHomePage() {
 		<div className="overflow-y-auto p-5">
 			<main>
 				<div className="flex justify-between">
-					<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Blog</h1>
-					<button className="btn-primary">Work with me 📱</button>
+					<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Lab 🧪</h1>
 				</div>
 				<ul className="grid grid-cols-1 gap-3 overflow-visible pt-5 sm:grid-cols-2 lg:grid-cols-3">
 					{postMetadaList.map((metadata: Metadata) => (
