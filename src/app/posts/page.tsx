@@ -29,8 +29,8 @@ export default async function PostsPage() {
 		})
 		return metadataList
 	}
-
 	const postMetadaList = await getPostsMetadata()
+
 	return (
 		<div className="overflow-y-auto p-5">
 			<main>
@@ -44,7 +44,7 @@ export default async function PostsPage() {
 								title={metadata.title}
 								imageHref={metadata.image}
 								description={metadata.summary}
-								new={new Date(metadata.publishedAt) > addDays(new Date(), -7)}
+								isNew={new Date(metadata.publishedAt) > addDays(new Date(), -7)}
 								slug={metadata.slug}
 							/>
 						</li>
