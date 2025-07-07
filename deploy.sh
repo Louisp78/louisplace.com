@@ -1,5 +1,4 @@
 #! /bin/sh
-. ~/.profile
 cd /var/www/louisplace.com || exit 1 &&
 git pull origin main &&
 pnpm install &&
