@@ -1,0 +1,12 @@
+FROM httpd:2.4
+
+# Enable SSL
+RUN apt-get update && \
+    apt-get install -y certbot python3-certbot-apache && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy custom Apache config
+COPY conf/ /etc/apache2/sites-enabled/
+
+# Expose ports
+EXPOSE 80 443
