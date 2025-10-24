@@ -1,12 +1,18 @@
 FROM node:20
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-RUN npm install -g pm2 && npm install --production
+COPY package*.json pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
+RUN pnpm run build
+
 EXPOSE 3000
 
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+CMD ["pnpm", "start"]
