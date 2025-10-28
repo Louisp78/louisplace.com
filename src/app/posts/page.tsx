@@ -1,27 +1,20 @@
 import PostCard from '@/components/post-card/PostCard'
 import { Metadata } from '@/types/metadata'
-import { globby } from 'globby'
-import fs from 'fs'
+import { PostData } from '@/types/post'
 import { addDays } from '@/utils/date'
-import { compileMDX } from 'next-mdx-remote/rsc'
+import fs from 'fs'
+import path from 'path'
+
+const POSTS_PATH = path.join(process.cwd(), 'src/posts')
 
 export default async function PostsPage() {
 	async function getPostsMetadata(): Promise<Metadata[]> {
-		const postList = await globby('src/posts/**/*.mdx', {
-			absolute: true,
-			onlyFiles: true,
-		})
+		const postFileList = fs.readdirSync(POSTS_PATH).filter((file) => file.endsWith('.json'))
 		const metadataList = await Promise.all(
-			postList.map(async (pathFile) => {
-				const source = fs.readFileSync(pathFile)
-				const { frontmatter } = await compileMDX<Metadata>({
-					source,
-					options: { parseFrontmatter: true },
-					components: {
-						PostCard,
-					},
-				})
-				return frontmatter as Metadata
+			postFileList.map(async (filePath) => {
+				const fileContent = fs.readFileSync(path.join(POSTS_PATH, filePath), 'utf8')
+				const postData: PostData = JSON.parse(fileContent)
+				return postData.metadata
 			})
 		)
 		metadataList.sort((a, b) => {

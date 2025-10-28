@@ -1,0 +1,63 @@
+{
+	"metadata": {
+		"title": "SDUI Pattern for Mobile Apps",
+		"summary": "Discover how the Server-Driven UI pattern empowers mobile teams...",
+		"image": "/sdui-pattern.png",
+		"slug": "sdui-pattern",
+		"publishedAt": "2025-06-23T00:00:00Z"
+	},
+	"content": [
+		{
+			"type": "hero",
+			"data": {
+				"title": "🚀 **Discovering the SDUI Pattern in Mobile Development**",
+				"image": {
+					"src": "/sdui-pattern.png",
+					"width": 500,
+					"height": 300,
+					"alt": "SDUI Pattern illustration"
+				}
+			}
+		},
+		{
+			"type": "paragraph",
+			"data": {
+				"text": "During my current internship, I discovered a super powerful pattern: **SDUI** — _Server-Driven UI_."
+			}
+		},
+		{
+			"type": "callout",
+			"data": {
+				"title": "The idea?",
+				"content": "👉 **The backend controls the interface**: it sends a structure (often in JSON) that the frontend interprets to dynamically display the right components.",
+				"style": "info"
+			}
+		},
+		{
+			"type": "section",
+			"data": {
+				"title": "🎯 **Why is it useful?**",
+				"items": [
+					"No need to redeploy the app to change the UI ✅",
+					"In a mobile context, product teams can make **instant adjustments** without waiting for store validation cycles 📱",
+					"Perfect for creating **dynamic sections**, like a home screen with modules personalized for the user",
+					"Enables **large-scale A/B testing** (like Spotify, Meta, Amazon…)"
+				]
+			}
+		},
+		{
+			"type": "quote",
+			"data": {
+				"text": "⏳ This way, you bypass long mobile deployment procedures while keeping very fine control over the user experience.",
+				"highlight": true
+			}
+		},
+		{
+			"type": "cta",
+			"data": {
+				"text": "Do you use this pattern in your apps? I'm curious to hear your feedback on its implementation on the frontend or backend!",
+				"style": "question"
+			}
+		}
+	]
+}

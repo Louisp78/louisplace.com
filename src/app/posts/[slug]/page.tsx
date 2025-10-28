@@ -1,38 +1,36 @@
-import { mdxComponents } from '@/components/mdx-components'
-import { Metadata } from '@/types/metadata'
+import PostRenderer from '@/components/post-renderer'
+import { PostData } from '@/types/post'
 import fs from 'fs'
-import { compileMDX } from 'next-mdx-remote/rsc'
 import path from 'path'
 
 interface BlogPostProps {
-	params: Promise<{
-		slug: string
-	}>
+	params: Promise<{ slug: string }>
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
 	const { slug } = await params
 	const postsDir = path.join(process.cwd(), 'src/posts')
-	const filePath = path.join(postsDir, `${slug}.mdx`)
-	const source = fs.readFileSync(filePath, 'utf8')
-	const { content } = await compileMDX<Metadata>({
-		source,
-		options: { parseFrontmatter: true },
-		components: mdxComponents,
-	})
+	const filePath = path.join(postsDir, `${slug}.json`)
 
-	return <div className="m-6">{content}</div>
+	const fileContent = fs.readFileSync(filePath, 'utf8')
+	const postData: PostData = JSON.parse(fileContent)
+
+	// TODO: add tag for SEO using metadata
+	return (
+		<article>
+			{/* TODO : display an header with some of metadata in it */}
+			<PostRenderer content={postData.content} />
+		</article>
+	)
 }
 
-// Making Next.js generate static paths for the dynamic route
 export function generateStaticParams() {
 	const postsDir = path.join(process.cwd(), 'src/posts')
-	const files = fs.readdirSync(postsDir)
-	return files
-		.filter((file) => file.endsWith('.mdx'))
-		.map((file) => ({
-			slug: file.replace(/\.mdx$/, ''),
-		}))
+	const files = fs.readdirSync(postsDir).filter((file) => file.endsWith('.json'))
+
+	return files.map((file) => ({
+		slug: file.replace(/\.json$/, ''),
+	}))
 }
 
 export const dynamicParams = false
