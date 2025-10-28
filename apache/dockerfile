@@ -7,6 +7,7 @@ RUN echo "ServerName app.louisplace.com" >> $HTTPD_CONF_DIR
 
 RUN sed -i 's/#LoadModule ssl_module/LoadModule ssl_module/' $HTTPD_CONF_DIR && \
     sed -i 's/#LoadModule proxy_module/LoadModule proxy_module/' $HTTPD_CONF_DIR && \
+    sed -i 's/#LoadModule proxy_http_module/LoadModule proxy_http_module/' $HTTPD_CONF_DIR && \
     sed -i 's/#LoadModule socache_shmcb_module/LoadModule socache_shmcb_module/' $HTTPD_CONF_DIR
 
 # Include our custom config
