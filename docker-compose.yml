@@ -6,8 +6,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./apache/conf:/etc/apache2/sites-enabled
-      - certs:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./apache/conf:/usr/local/apache2/conf/extra:ro
     depends_on:
       - app
 
