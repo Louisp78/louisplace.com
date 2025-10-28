@@ -5,8 +5,11 @@ RUN apt-get update && \
     apt-get install -y certbot python3-certbot-apache && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy custom Apache config
-COPY conf/ /etc/apache2/sites-enabled/
+RUN echo "ServerName app.louisplace.com" >> /usr/local/apache2/conf/httpd.conf
+
+RUN echo "Include conf/extra/next_app.conf" >> /usr/local/apache2/conf/httpd.conf
+
+COPY conf/ /usr/local/apache2/conf/extra/
 
 # Expose ports
 EXPOSE 80 443
