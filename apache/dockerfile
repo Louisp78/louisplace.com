@@ -1,0 +1,8 @@
+FROM httpd:2.4
+
+# Set global ServerName
+RUN echo "ServerName app.louisplace.com" >> /usr/local/apache2/conf/httpd.conf
+
+# Include our custom config
+RUN echo "Include conf/extra/next_app.conf" >> /usr/local/apache2/conf/httpd.conf
+
