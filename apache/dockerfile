@@ -1,14 +1,8 @@
 FROM httpd:2.4
 
-# Enable SSL and proxy modules
-RUN sed -i 's/#LoadModule ssl_module/LoadModule ssl_module/' /usr/local/apache2/conf/httpd.conf && \
-    sed -i 's/#LoadModule rewrite_module/LoadModule rewrite_module/' /usr/local/apache2/conf/httpd.conf && \
-sed -i 's/#LoadModule proxy_module/LoadModule proxy_module/' /usr/local/apache2/conf/httpd.conf && \
-sed -i 's/#LoadModule proxy_http_module/LoadModule proxy_http_module/' /usr/local/apache2/conf/httpd.conf && \
-sed -i 's/#LoadModule headers_module/LoadModule headers_module/' /usr/local/apache2/conf/httpd.conf
-
 # Set global ServerName
 RUN echo "ServerName app.louisplace.com" >> /usr/local/apache2/conf/httpd.conf
 
 # Include our custom config
 RUN echo "Include conf/extra/next_app.conf" >> /usr/local/apache2/conf/httpd.conf
+
