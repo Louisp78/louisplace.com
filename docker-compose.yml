@@ -1,0 +1,21 @@
+services:
+  apache:
+    build: ./apache
+    container_name: apache_server
+    ports:
+      - "80:80"
+      - "443:443"
+    # To use Let's Encrypt certificates, please ensure you have them in /etc/letsencrypt on the host machine
+    # if not use certbot or another method to obtain them.
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./apache/conf:/usr/local/apache2/conf/extra:ro
+    depends_on:
+      - app
+
+  app:
+    build: ./
+    container_name: next_app
+    environment:
+      NODE_ENV: production
+    restart: always
