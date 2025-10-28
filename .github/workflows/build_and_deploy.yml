@@ -11,9 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/project-setup
 
-      - name: Execute remote SSH commands using SSH key
+      - name: Execute remote SSH build commands
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -29,13 +28,12 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/project-setup
 
-      - name: Execute remote SSH commands using SSH key
+      - name: Execute remote SSH deploy script
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: ./louisplace.com/deploy.s
+          script: ./louisplace.com/deploy.sh
