@@ -11,6 +11,13 @@ export default function ComponentRenderer({ component }: { component: PostDataCo
 					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }} />
 				</div>
 			)
+		case 'title':
+			return (
+				<h2
+					className="mb-4 text-2xl font-semibold"
+					dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }}
+				/>
+			)
 
 		case 'callout':
 			return (

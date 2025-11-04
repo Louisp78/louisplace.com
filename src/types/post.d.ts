@@ -1,5 +1,11 @@
 export type PostDataContent =
 	| {
+			type: 'title'
+			data: {
+				text: string
+			}
+	  }
+	| {
 			type: 'paragraph'
 			data: {
 				text: string
