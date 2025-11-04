@@ -1,3 +1,5 @@
+export type CalloutStyle = 'info' | 'warning' | 'error' | 'success'
+
 export type PostDataContent =
 	| {
 			type: 'title'
@@ -16,7 +18,7 @@ export type PostDataContent =
 			data: {
 				title: string
 				content: string
-				style: 'info' | 'warning' | 'error' | 'success'
+				style: CalloutStyle
 			}
 	  }
 	| {

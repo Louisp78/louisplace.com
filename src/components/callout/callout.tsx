@@ -1,9 +1,10 @@
+import { CalloutStyle } from '@/types/post'
 import { parseMarkdown } from '@/utils/markdown'
 
 type CalloutProps = {
 	title: string
 	content: string
-	style: 'info' | 'warning' | 'error' | 'success'
+	style: CalloutStyle
 }
 
 export default function Callout(props: CalloutProps) {
@@ -14,7 +15,7 @@ export default function Callout(props: CalloutProps) {
 		</div>
 	)
 }
-function getCalloutStyle(style: string): string {
+function getCalloutStyle(style: CalloutStyle): string {
 	switch (style) {
 		case 'info':
 			return 'bg-blue-50 border-l-4 border-blue-400 text-black'
