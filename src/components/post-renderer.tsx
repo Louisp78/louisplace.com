@@ -25,7 +25,10 @@ function ComponentRenderer({ component }: { component: PostComponent }) {
 		case 'hero':
 			return (
 				<div className="mb-12 text-center">
-					<h1 className="mb-8 text-4xl font-bold">{component.data.title}</h1>
+					<h1
+						className="mb-8 text-4xl font-bold"
+						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.title) }}
+					/>
 					{component.data.image && (
 						<div className="mb-8 flex justify-center">
 							<Image
@@ -42,7 +45,7 @@ function ComponentRenderer({ component }: { component: PostComponent }) {
 
 		case 'paragraph':
 			return (
-				<div className="prose prose-lg mb-6">
+				<div className="mb-6">
 					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }} />
 				</div>
 			)
@@ -58,7 +61,10 @@ function ComponentRenderer({ component }: { component: PostComponent }) {
 		case 'section':
 			return (
 				<div className="mb-8">
-					<h2 className="mb-4 text-2xl font-semibold">{component.data.title}</h2>
+					<h2
+						className="mb-4 text-2xl font-semibold"
+						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.title) }}
+					/>
 					<ul className="space-y-2">
 						{component.data.items.map((item: string, index: number) => (
 							<li key={index} className="flex items-start">
@@ -74,7 +80,7 @@ function ComponentRenderer({ component }: { component: PostComponent }) {
 			return (
 				<blockquote
 					className={`mb-6 border-l-4 border-blue-500 py-4 pl-6 italic ${
-						component.data.highlight ? 'rounded-r-lg bg-blue-50' : ''
+						component.data.highlight ? 'rounded-r-lg bg-blue-50 text-black' : ''
 					}`}
 				>
 					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }} />
@@ -103,23 +109,23 @@ function parseMarkdown(text: string): string {
 function getCalloutStyle(style: string): string {
 	switch (style) {
 		case 'info':
-			return 'bg-blue-50 border-l-4 border-blue-400'
+			return 'bg-blue-50 border-l-4 border-blue-400 text-black'
 		case 'warning':
-			return 'bg-yellow-50 border-l-4 border-yellow-400'
+			return 'bg-yellow-50 border-l-4 border-yellow-400 text-black'
 		case 'success':
-			return 'bg-green-50 border-l-4 border-green-400'
+			return 'bg-green-50 border-l-4 border-green-400 text-black'
 		default:
-			return 'bg-gray-50 border-l-4 border-gray-400'
+			return 'bg-gray-50 border-l-4 border-gray-400 text-black'
 	}
 }
 
 function getCTAStyle(style: string): string {
 	switch (style) {
 		case 'question':
-			return 'bg-purple-50 border border-purple-200'
+			return 'bg-purple-50 border border-purple-200 text-black'
 		case 'action':
-			return 'bg-green-50 border border-green-200'
+			return 'bg-green-50 border border-green-200 text-black'
 		default:
-			return 'bg-gray-50 border border-gray-200'
+			return 'bg-gray-50 border border-gray-200 text-black'
 	}
 }

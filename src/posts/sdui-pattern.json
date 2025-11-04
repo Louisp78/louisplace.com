@@ -10,7 +10,7 @@
 		{
 			"type": "hero",
 			"data": {
-				"title": "🚀 **Discovering the SDUI Pattern in Mobile Development**",
+				"title": "**Discovering the SDUI Pattern in Mobile Development** 💻",
 				"image": {
 					"src": "/sdui-pattern.png",
 					"width": 500,
@@ -22,7 +22,7 @@
 		{
 			"type": "paragraph",
 			"data": {
-				"text": "During my current internship, I discovered a super powerful pattern: **SDUI** — _Server-Driven UI_."
+				"text": "During my current internship, I discovered a super powerful pattern: **SDUI** — Server Driven UI Pattern."
 			}
 		},
 		{
@@ -53,10 +53,15 @@
 			}
 		},
 		{
-			"type": "cta",
+			"type": "paragraph",
 			"data": {
-				"text": "Do you use this pattern in your apps? I'm curious to hear your feedback on its implementation on the frontend or backend!",
-				"style": "question"
+				"text": "And you know what? This pattern is used for displaying this very post! The backend sends a JSON structure that my Next.js frontend interprets to render the components you see here."
+			}
+		},
+		{
+			"type": "paragraph",
+			"data": {
+				"text": "```json\n{\n  \"type\": \"paragraph\",\n  \"data\": {\n    \"text\": \"During my current internship, I discovered a super powerful pattern: **SDUI** — Server Driven UI Pattern.\"\n  }\n}\n```"
 			}
 		}
 	]

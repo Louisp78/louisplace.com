@@ -11,7 +11,7 @@ export interface PostCardProps {
 
 export default function PostCard(props: PostCardProps) {
 	return (
-		<TransitionLink href={'/posts/' + props.slug}>
+		<TransitionLink href={'/' + props.slug}>
 			<div className="relative transition-transform duration-200 ease-in-out hover:scale-[1.01]">
 				{props.isNew && (
 					<div className="absolute -top-4 -right-3 w-fit rounded-4xl border-2 border-amber-900 bg-amber-300 px-2 py-0.5 text-amber-900">
