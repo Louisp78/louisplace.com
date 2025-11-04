@@ -1,131 +1,40 @@
+import { PostData } from '@/types/post'
+import { parseMarkdown } from '@/utils/markdown'
 import Image from 'next/image'
+import ComponentRenderer from './component-renderer'
+import Quote from './quote'
 
-interface PostComponent {
-	type: string
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	data: any
-}
-
-interface PostRendererProps {
-	content: PostComponent[]
-}
-
-export default function PostRenderer({ content }: PostRendererProps) {
+export default function PostRenderer({ post }: { post: PostData }) {
 	return (
-		<div className="mx-auto max-w-4xl px-6 py-8">
-			{content.map((component, index) => (
-				<ComponentRenderer key={index} component={component} />
-			))}
-		</div>
+		<>
+			<section className="mb-12 text-center">
+				<header className="mb-2 block text-sm text-gray-500">
+					By {post.metadata.author} • Published{' '}
+					{new Date(post.metadata.publishedAt).toLocaleDateString()} •
+					{post.metadata.estimatedReadingTimeMinutes} min read
+				</header>
+				<h1
+					className="mb-8 text-4xl font-bold"
+					dangerouslySetInnerHTML={{ __html: parseMarkdown(post.metadata.title) }}
+				/>
+				{post.metadata.image && (
+					<div className="mb-8 flex justify-center">
+						<Image
+							src={post.metadata.image.src}
+							width={post.metadata.image.width}
+							height={post.metadata.image.height}
+							alt={post.metadata.image.alt}
+							className="rounded-lg shadow-lg"
+						/>
+					</div>
+				)}
+				<Quote text={post.metadata.summary} />
+			</section>
+			<section>
+				{post.content.map((component, index) => (
+					<ComponentRenderer key={index} component={component} />
+				))}
+			</section>
+		</>
 	)
-}
-
-function ComponentRenderer({ component }: { component: PostComponent }) {
-	switch (component.type) {
-		case 'hero':
-			return (
-				<div className="mb-12 text-center">
-					<h1
-						className="mb-8 text-4xl font-bold"
-						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.title) }}
-					/>
-					{component.data.image && (
-						<div className="mb-8 flex justify-center">
-							<Image
-								src={component.data.image.src}
-								width={component.data.image.width}
-								height={component.data.image.height}
-								alt={component.data.image.alt}
-								className="rounded-lg shadow-lg"
-							/>
-						</div>
-					)}
-				</div>
-			)
-
-		case 'paragraph':
-			return (
-				<div className="mb-6">
-					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }} />
-				</div>
-			)
-
-		case 'callout':
-			return (
-				<div className={`mb-6 rounded-lg p-6 ${getCalloutStyle(component.data.style)}`}>
-					<h3 className="mb-2 font-semibold">{component.data.title}</h3>
-					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.content) }} />
-				</div>
-			)
-
-		case 'section':
-			return (
-				<div className="mb-8">
-					<h2
-						className="mb-4 text-2xl font-semibold"
-						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.title) }}
-					/>
-					<ul className="space-y-2">
-						{component.data.items.map((item: string, index: number) => (
-							<li key={index} className="flex items-start">
-								<span className="mr-2">•</span>
-								<span dangerouslySetInnerHTML={{ __html: parseMarkdown(item) }} />
-							</li>
-						))}
-					</ul>
-				</div>
-			)
-
-		case 'quote':
-			return (
-				<blockquote
-					className={`mb-6 border-l-4 border-blue-500 py-4 pl-6 italic ${
-						component.data.highlight ? 'rounded-r-lg bg-blue-50 text-black' : ''
-					}`}
-				>
-					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }} />
-				</blockquote>
-			)
-
-		case 'cta':
-			return (
-				<div className={`mb-6 rounded-lg p-6 ${getCTAStyle(component.data.style)}`}>
-					<p
-						className="text-center font-medium"
-						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }}
-					/>
-				</div>
-			)
-
-		default:
-			return <div>Unknown component type: {component.type}</div>
-	}
-}
-
-function parseMarkdown(text: string): string {
-	return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')
-}
-
-function getCalloutStyle(style: string): string {
-	switch (style) {
-		case 'info':
-			return 'bg-blue-50 border-l-4 border-blue-400 text-black'
-		case 'warning':
-			return 'bg-yellow-50 border-l-4 border-yellow-400 text-black'
-		case 'success':
-			return 'bg-green-50 border-l-4 border-green-400 text-black'
-		default:
-			return 'bg-gray-50 border-l-4 border-gray-400 text-black'
-	}
-}
-
-function getCTAStyle(style: string): string {
-	switch (style) {
-		case 'question':
-			return 'bg-purple-50 border border-purple-200 text-black'
-		case 'action':
-			return 'bg-green-50 border border-green-200 text-black'
-		default:
-			return 'bg-gray-50 border border-gray-200 text-black'
-	}
 }

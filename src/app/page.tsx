@@ -1,6 +1,5 @@
-import PostCard from '@/components/post-card/PostCard'
-import { Metadata } from '@/types/metadata'
-import { PostData } from '@/types/post'
+import PostCard from '@/components/post-card'
+import { PostData, PostMetadata } from '@/types/post'
 import { addDays } from '@/utils/date'
 import fs from 'fs'
 import path from 'path'
@@ -8,7 +7,7 @@ import path from 'path'
 const POSTS_PATH = path.join(process.cwd(), 'src/posts')
 
 export default async function PostsPage() {
-	async function getPostsMetadata(): Promise<Metadata[]> {
+	async function getPostsMetadata(): Promise<PostMetadata[]> {
 		const postFileList = fs.readdirSync(POSTS_PATH).filter((file) => file.endsWith('.json'))
 		const metadataList = await Promise.all(
 			postFileList.map(async (filePath) => {
@@ -26,16 +25,16 @@ export default async function PostsPage() {
 
 	return (
 		<div className="overflow-y-auto p-5">
-			<main>
+			<main className="h-screen">
 				<div className="flex justify-between">
-					<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Lab 🧪</h1>
+					<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Blog</h1>
 				</div>
 				<ul className="grid grid-cols-1 gap-3 overflow-visible pt-5 sm:grid-cols-2 lg:grid-cols-3">
-					{postMetadaList.map((metadata: Metadata) => (
+					{postMetadaList.map((metadata: PostMetadata) => (
 						<li key={metadata.slug}>
 							<PostCard
 								title={metadata.title}
-								imageHref={metadata.image}
+								image={metadata.image}
 								description={metadata.summary}
 								isNew={new Date(metadata.publishedAt) > addDays(new Date(), -7)}
 								slug={metadata.slug}
