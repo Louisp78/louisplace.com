@@ -37,7 +37,7 @@ export default function ComponentRenderer({ component }: { component: PostDataCo
 						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.title) }}
 					/>
 					<ul className="space-y-2">
-						{component.data.items.map((item: string, index: number) => (
+						{component.data.items.map((item: string) => (
 							<li key={generateHash(item)} className="flex items-start">
 								<span className="mr-2">•</span>
 								<span dangerouslySetInnerHTML={{ __html: parseMarkdown(item) }} />

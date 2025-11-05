@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 		description: postData.metadata.summary,
 		authors: postData.metadata.author ? [{ name: postData.metadata.author }] : undefined,
 		keywords: postData.metadata.tags,
+		metadataBase: new URL(process.env.PUBLIC_URL || 'http://localhost:3000'),
 		openGraph: {
 			title: postData.metadata.title,
 			description: postData.metadata.summary,

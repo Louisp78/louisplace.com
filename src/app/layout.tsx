@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -37,7 +38,7 @@ export default function RootLayout({
 						rel="noopener noreferrer"
 					>
 						Visit the source on GitHub
-						<img src="github.svg" alt="GitHub" className="inline h-5 w-5" />
+						<Image src="github.svg" alt="GitHub" className="inline h-5 w-5" />
 					</a>
 				</footer>
 			</body>
