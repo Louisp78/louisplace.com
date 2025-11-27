@@ -38,7 +38,7 @@ export default function RootLayout({
 						rel="noopener noreferrer"
 					>
 						Visit the source on GitHub
-						<Image src="github.svg" alt="GitHub" className="inline h-5 w-5" />
+						<Image src="github.svg" alt="GitHub" width={16} height={16} className="inline" />
 					</a>
 				</footer>
 			</body>
