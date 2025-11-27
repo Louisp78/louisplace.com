@@ -26,8 +26,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-				{children}
+			<body className={`${geistSans.variable} ${geistMono.variable} overflow-y-auto antialiased`}>
+				<div className="min-h-screen">{children}</div>
 				<footer className="border-t-[0.5px] border-gray-300 p-5 text-center text-sm text-gray-500">
 					<p>© {new Date().getFullYear()} Louis Place. All rights reserved.</p>
 					<p>Made with ❤️ using Next.js, TypeScript, and Tailwind CSS. Hosted using my VPS 🫶</p>
