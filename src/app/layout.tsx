@@ -3,14 +3,10 @@ import Image from 'next/image'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import TEXT from '@/constants/text'
+import Spacing from '@/constants/spacing'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
-	subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
 	subsets: ['latin'],
 })
 
@@ -25,8 +21,8 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} overflow-y-auto antialiased`}>
+		<html lang="en" className={geistSans.className}>
+			<body className={`overflow-y-auto antialiased`}>
 				<div className="min-h-screen">{children}</div>
 				<footer className="border-t-[0.5px] border-gray-300 p-5 text-center text-sm text-gray-500">
 					<p>{TEXT.footer.copyright}</p>
@@ -38,7 +34,13 @@ export default function RootLayout({
 						rel="noopener noreferrer"
 					>
 						{TEXT.footer.visitGithub}
-						<Image src="github.svg" alt="GitHub" width={16} height={16} className="inline" />
+						<Image
+							src="github.svg"
+							alt="GitHub"
+							width={Spacing.ICON_SIZE}
+							height={Spacing.ICON_SIZE}
+							className="inline"
+						/>
 					</a>
 				</footer>
 			</body>
