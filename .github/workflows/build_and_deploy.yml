@@ -6,6 +6,10 @@ on:
   workflow_call:
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: ./client
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,4 +40,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: ./louisplace.com/deploy.sh
+          script: ./louisplace.com/client/deploy.sh
