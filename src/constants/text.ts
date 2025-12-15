@@ -10,6 +10,10 @@ const TEXT = {
 		technologies:
 			'Made with ❤️ using Next.js, TypeScript, and Tailwind CSS. Hosted using my VPS 🫶',
 	},
+	github: {
+		url: 'https://github.com/Louisp78/louisplace.com',
+		iconAlt: 'GitHub Logo',
+	},
 }
 
 export default TEXT

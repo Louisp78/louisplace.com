@@ -1,4 +1,4 @@
-import { CalloutStyle } from '@/types/post'
+import { CalloutStyle } from '@/features/post/post'
 import { parseMarkdown } from '@/utils/markdown'
 
 type CalloutProps = {

@@ -1,5 +1,4 @@
 .page-transition {
-	backgound: white;
 	opacity: 0;
 	transform: translateX(50%);
 	filter: blur(12px);
