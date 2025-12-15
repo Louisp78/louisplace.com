@@ -14,7 +14,7 @@ services:
       - app
 
   app:
-    build: ./
+    build: ./client
     container_name: next_app
     environment:
       NODE_ENV: production
