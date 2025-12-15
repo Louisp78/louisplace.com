@@ -6,7 +6,7 @@ const geistMono = Geist_Mono({
 })
 const syne = Syne({
 	subsets: ['latin'],
-	weight: ['400', '500', '600', '700', '800'],
+	weight: ['700'],
 	variable: '--font-syne',
 })
 
