@@ -22,6 +22,7 @@ export default function Footer() {
 					className="inline"
 				/>
 			</a>
+			<a href="/api/auth/github/login">{TEXT.auth.signIn}</a>
 		</footer>
 	)
 }

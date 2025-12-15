@@ -14,6 +14,9 @@ const TEXT = {
 		url: 'https://github.com/Louisp78/louisplace.com',
 		iconAlt: 'GitHub Logo',
 	},
+	auth: {
+		signIn: 'Sign in',
+	},
 }
 
 export default TEXT
