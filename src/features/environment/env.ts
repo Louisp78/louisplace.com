@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 const EnvSchema = z.object({
-	PUBLIC_BASE_URL: z.string('PUBLIC_BASE_URL must be a valid URL'),
+	PUBLIC_BASE_URL: z.string().min(1, 'PUBLIC_BASE_URL is required'),
 	PUBLIC_URL: z.url('PUBLIC_URL must be a valid URL'),
 	GITHUB_ID: z.string().min(1, 'GITHUB_ID is required'),
 	GOOGLE_ID: z.string().min(1, 'GOOGLE_ID is required'),
