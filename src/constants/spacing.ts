@@ -1,5 +1,5 @@
-const Spacing = {
-	ICON_SIZE: 16,
+const SPACING = {
+	iconSize: 16,
 }
 
-export default Spacing
+export default SPACING
