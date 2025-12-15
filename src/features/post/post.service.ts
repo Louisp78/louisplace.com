@@ -1,13 +1,12 @@
 import { PostData } from '@/features/post/post'
-import fs from 'fs'
-import path from 'path'
-import PostServiceInterface from './post.interface'
 import { Metadata } from 'next'
-
-const POSTS_PATH = path.join(process.cwd(), 'src/features/post/data')
+import PostServiceInterface from './post.service.interface'
+import PostRepositoryFactory from './repository/post.repository.factory'
 
 export default class PostService implements PostServiceInterface {
 	public posts: PostData[] = []
+
+	private repository = PostRepositoryFactory.create()
 
 	private static instance: PostService
 
@@ -42,14 +41,11 @@ export default class PostService implements PostServiceInterface {
 	}
 
 	private async getPosts(): Promise<PostData[]> {
-		const postFileList = fs.readdirSync(POSTS_PATH).filter((file) => file.endsWith('.json'))
-		const posts = await Promise.all(
-			postFileList.map(async (filePath) => {
-				const fileContent = fs.readFileSync(path.join(POSTS_PATH, filePath), 'utf8')
-				const postData: PostData = JSON.parse(fileContent)
-				return postData
-			})
-		)
+		const posts = await this.repository.getPosts()
+		if (!posts) {
+			return []
+		}
+
 		posts.sort((a, b) => {
 			return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
 		})
