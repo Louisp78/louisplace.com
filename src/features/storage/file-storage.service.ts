@@ -1,5 +1,5 @@
 import fs from 'fs'
-import StorageServiceInterface from './storage.service-interface'
+import StorageServiceInterface from './storage.service.interface'
 import path from 'path'
 
 export default class FileStorageService implements StorageServiceInterface {

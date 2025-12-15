@@ -1,4 +1,4 @@
-import StorageServiceInterface from '@/features/storage/storage.service-interface'
+import StorageServiceInterface from '@/features/storage/storage.service.interface'
 import path from 'path'
 import { PostData } from '../post'
 import PostRepositoryInterface from './post.repository.interface'
