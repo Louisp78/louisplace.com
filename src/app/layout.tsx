@@ -1,8 +1,8 @@
+import Footer from '@/components/footer'
 import TEXT from '@/constants/text'
-import font from '@/features/font/font.service'
 import type { Metadata } from 'next'
 import './globals.css'
-import Footer from '@/components/footer'
+import fontService from '@/features/font/font.service'
 
 export const metadata: Metadata = {
 	title: TEXT.metadata.title,
@@ -15,7 +15,10 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en" className={font.fontSans.className}>
+		<html
+			lang="en"
+			className={`${fontService.fontBase.className} ${fontService.fontTitle.variable}`}
+		>
 			<body className={`overflow-y-auto antialiased`}>
 				<div className="min-h-screen">{children}</div>
 				<Footer />

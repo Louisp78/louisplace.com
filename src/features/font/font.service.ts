@@ -1,11 +1,16 @@
-import { Geist } from 'next/font/google'
+import { Geist_Mono, Syne } from 'next/font/google'
 import FontInterface from './font.interface'
 
-const geistSans = Geist({
-	variable: '--font-geist-sans',
+const geistMono = Geist_Mono({
 	subsets: ['latin'],
+})
+const syne = Syne({
+	subsets: ['latin'],
+	weight: ['700'],
+	variable: '--font-syne',
 })
 
 export default {
-	fontSans: geistSans,
+	fontBase: geistMono,
+	fontTitle: syne,
 } as FontInterface
