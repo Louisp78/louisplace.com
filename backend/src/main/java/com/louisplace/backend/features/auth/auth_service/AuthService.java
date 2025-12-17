@@ -10,7 +10,9 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.louisplace.backend.features.auth.OAuthProvider;
+import com.louisplace.backend.features.auth.UserEntity;
 import com.louisplace.backend.features.auth.config.OAuthConfig;
+import com.louisplace.backend.features.user.IUserRepository;
 
 @Service
 public class AuthService implements OAuthStrategy {
@@ -19,9 +21,14 @@ public class AuthService implements OAuthStrategy {
 
     private final OAuthConfig oAuthConfig;
 
-    public AuthService(WebClient.Builder webClientBuilder, OAuthConfig oAuthConfig) {
+    private final IUserRepository userRepository;
+
+    public AuthService(WebClient.Builder webClientBuilder,
+            OAuthConfig oAuthConfig,
+            IUserRepository userRepository) {
         this.webClient = webClientBuilder.build();
         this.oAuthConfig = oAuthConfig;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -44,7 +51,21 @@ public class AuthService implements OAuthStrategy {
 
         String accessToken = (String) tokenResponse.get("access_token");
 
-        System.out.println("Access Token: " + accessToken);
+        Map userInfo = webClient.get()
+                .uri(provider.getUserInfoUrl())
+                .headers(headers -> headers.setBearerAuth(accessToken))
+                .retrieve()
+                .bodyToMono(Map.class)
+                .block();
+
+        String name = (String) userInfo.get("name");
+        String email = (String) userInfo.get("email");
+
+        UserEntity user = new UserEntity();
+        user.setName(name);
+        user.setEmail(email);
+        userRepository.save(user);
+
         return new UserModel();
     }
 
