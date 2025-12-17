@@ -32,7 +32,7 @@ public class AuthService implements OAuthStrategy {
     }
 
     @Override
-    public UserModel authenticate(OAuthProvider provider, String code) {
+    public UserEntity authenticate(OAuthProvider provider, String code) {
 
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("code", code);
@@ -61,12 +61,16 @@ public class AuthService implements OAuthStrategy {
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
 
-        UserEntity user = new UserEntity();
-        user.setName(name);
-        user.setEmail(email);
-        userRepository.save(user);
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseGet(() -> {
+                    UserEntity newUser = new UserEntity();
+                    newUser.setName(name);
+                    newUser.setEmail(email);
+                    userRepository.save(newUser);
+                    return newUser;
+                });
 
-        return new UserModel();
+        return user;
     }
 
 }
