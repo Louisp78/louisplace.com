@@ -7,7 +7,6 @@ export async function GET(request: Request) {
 	const state = url.searchParams.get('state')
 
 	const stateCheck = await new AuthService().verifyState(state || '')
-
 	if (!stateCheck || !code) {
 		return NextResponse.redirect(new URL('/?error=no_code', request.url))
 	}
@@ -19,9 +18,17 @@ export async function GET(request: Request) {
 		method: 'POST',
 	})
 
-	console.log('Backend response status:', response.status)
+	if (!response.ok) {
+		console.error('Backend auth failed:', response.status)
+		return NextResponse.redirect(new URL('/?error=auth_failed', request.url))
+	}
 
-	console.log('Google OAuth code:', code)
+	const redirectResponse = NextResponse.redirect(new URL('/', request.url))
 
-	return NextResponse.redirect(new URL('/', request.url))
+	const setCookieHeaders = response.headers.getSetCookie()
+	setCookieHeaders.forEach((cookie) => {
+		redirectResponse.headers.append('Set-Cookie', cookie)
+	})
+
+	return redirectResponse
 }
