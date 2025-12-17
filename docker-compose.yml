@@ -28,6 +28,7 @@ services:
     env_file:
       - backend/.env
       - ./.env.db
+      - ./.env.oauth
     ports:
       - "8080:8080"
     depends_on:
