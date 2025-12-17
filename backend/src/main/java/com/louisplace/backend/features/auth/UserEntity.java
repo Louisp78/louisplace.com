@@ -1,4 +1,4 @@
-package com.louisplace.backend;
+package com.louisplace.backend.features.auth;
 
 import java.io.Serializable;
 
