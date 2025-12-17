@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.louisplace.backend.features.auth.OAuthProvider;
+import com.louisplace.backend.features.auth.UserEntity;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("AuthService Tests")
@@ -39,7 +40,7 @@ class AuthServiceTest {
             OAuthProvider provider = OAuthProvider.GOOGLE;
 
             // When
-            UserModel result = authService.authenticate(provider, authorizationCode);
+            UserEntity result = authService.authenticate(provider, authorizationCode);
 
             // Then
             assertNotNull(result);
@@ -55,7 +56,7 @@ class AuthServiceTest {
             OAuthProvider provider = OAuthProvider.GITHUB;
 
             // When
-            UserModel result = authService.authenticate(provider, authorizationCode);
+            UserEntity result = authService.authenticate(provider, authorizationCode);
 
             // Then
             assertNotNull(result);
