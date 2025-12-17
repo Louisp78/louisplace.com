@@ -28,7 +28,7 @@ public class AuthService implements IAuthProvider {
                 .orElseThrow(
                         () -> new IllegalArgumentException("Unsupported authentication strategy: " + strategyType));
 
-        Map<String, Object> userInfo = strategy.authenticate(identifier, identifier);
+        Map<String, Object> userInfo = strategy.authenticate(identifier, credential);
 
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
