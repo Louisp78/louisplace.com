@@ -7,8 +7,8 @@ const STATE_COOKIE_KEY = 'oauth_state'
 
 export default class AuthService implements AuthServiceInterface {
 	public async getParams(provider: AuthProvider): Promise<URLSearchParams> {
-		const state = this.generateState()
-		await this.storeState(state)
+		// const state = this.generateState()
+		// await this.storeState(state)
 
 		switch (provider) {
 			case AuthProvider.GOOGLE:
@@ -17,7 +17,7 @@ export default class AuthService implements AuthServiceInterface {
 					redirect_uri: `${process.env.PUBLIC_URL}/api/auth/google/callback`,
 					response_type: 'code',
 					scope: 'openid email profile',
-					state,
+					// state,
 				})
 			case AuthProvider.GITHUB:
 				return new URLSearchParams({
@@ -25,7 +25,7 @@ export default class AuthService implements AuthServiceInterface {
 					redirect_uri: `${process.env.PUBLIC_URL}/api/auth/github/callback`,
 					response_type: 'code',
 					scope: 'read:user user:email',
-					state,
+					// state,
 				})
 		}
 	}
