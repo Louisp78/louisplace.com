@@ -7,8 +7,8 @@ const STATE_COOKIE_KEY = 'oauth_state'
 
 export default class AuthService implements AuthServiceInterface {
 	public async getParams(provider: AuthProvider): Promise<URLSearchParams> {
-		// const state = this.generateState()
-		// await this.storeState(state)
+		const state = this.generateState()
+		await this.storeState(state)
 
 		switch (provider) {
 			case AuthProvider.GOOGLE:
