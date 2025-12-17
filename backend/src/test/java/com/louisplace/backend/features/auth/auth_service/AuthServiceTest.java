@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.louisplace.backend.features.auth.OAuthProvider;
 import com.louisplace.backend.features.auth.UserEntity;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,15 +36,14 @@ class AuthServiceTest {
         void shouldAuthenticateWithGoogle() {
             // Given
             String authorizationCode = "google_auth_code_123";
-            OAuthProvider provider = OAuthProvider.GOOGLE;
 
             // When
-            UserEntity result = authService.authenticate(provider, authorizationCode);
+            UserEntity user = authService.authenticate("OAUTH", "google", authorizationCode);
 
             // Then
-            assertNotNull(result);
-            assertNotNull(result.getId());
-            assertNotNull(result.getName());
+            assertNotNull(user);
+            assertNotNull(user.getName());
+            assertNotNull(user.getEmail());
         }
 
         @Test
@@ -53,10 +51,9 @@ class AuthServiceTest {
         void shouldAuthenticateWithGitHub() {
             // Given
             String authorizationCode = "github_auth_code_456";
-            OAuthProvider provider = OAuthProvider.GITHUB;
 
             // When
-            UserEntity result = authService.authenticate(provider, authorizationCode);
+            UserEntity result = authService.authenticate("OAUTH", "github", authorizationCode);
 
             // Then
             assertNotNull(result);
