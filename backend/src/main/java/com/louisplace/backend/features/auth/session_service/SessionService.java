@@ -3,7 +3,9 @@ package com.louisplace.backend.features.auth.session_service;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SessionService implements ISessionProvider {
 
     @Override
