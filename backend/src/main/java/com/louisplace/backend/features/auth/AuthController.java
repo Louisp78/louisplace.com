@@ -26,7 +26,7 @@ public class AuthController {
         @Autowired
         private SessionService sessionService;
 
-        @PostMapping("/auth/{provider}")
+        @PostMapping("/oauth/{provider}")
         public ResponseEntity<UserDTO> auth(@PathVariable String provider, @RequestParam String code,
                         HttpServletRequest request) {
                 UserEntity user = authService.authenticate("OAUTH", provider, code);
