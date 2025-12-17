@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "users")
 public class UserEntity implements Serializable {
     @Getter
     @Id
@@ -23,6 +23,6 @@ public class UserEntity implements Serializable {
 
     @Setter
     @Getter
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 }
