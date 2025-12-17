@@ -5,6 +5,14 @@ import crypto from 'crypto'
 const STATE_COOKIE_MAX_AGE = 10 * 60
 const STATE_COOKIE_KEY = 'oauth_state'
 
+const RESPONSE_TYPE = 'code'
+
+const GOOGLE_SCOPES = ['openid', 'email', 'profile']
+const GITHUB_SCOPES = ['read:user', 'user:email']
+
+const GOOGLE_AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
+const GITHUB_AUTH_URL = 'https://github.com/login/oauth/authorize'
+
 export default class AuthService implements AuthServiceInterface {
 	public async getParams(provider: AuthProvider): Promise<URLSearchParams> {
 		const state = this.generateState()
@@ -15,16 +23,16 @@ export default class AuthService implements AuthServiceInterface {
 				return new URLSearchParams({
 					client_id: process.env.GOOGLE_ID || '',
 					redirect_uri: `${process.env.PUBLIC_URL}/api/auth/google/callback`,
-					response_type: 'code',
-					scope: 'openid email profile',
+					response_type: RESPONSE_TYPE,
+					scope: GOOGLE_SCOPES.join(' '),
 					state,
 				})
 			case AuthProvider.GITHUB:
 				return new URLSearchParams({
 					client_id: process.env.GITHUB_ID || '',
 					redirect_uri: `${process.env.PUBLIC_URL}/api/auth/github/callback`,
-					response_type: 'code',
-					scope: 'read:user user:email',
+					response_type: RESPONSE_TYPE,
+					scope: GITHUB_SCOPES.join(' '),
 					state,
 				})
 		}
@@ -33,9 +41,9 @@ export default class AuthService implements AuthServiceInterface {
 	public static getAuthUrl(provider: AuthProvider): string {
 		switch (provider) {
 			case AuthProvider.GOOGLE:
-				return 'https://accounts.google.com/o/oauth2/v2/auth'
+				return GOOGLE_AUTH_URL
 			case AuthProvider.GITHUB:
-				return 'https://github.com/login/oauth/authorize'
+				return GITHUB_AUTH_URL
 		}
 	}
 
