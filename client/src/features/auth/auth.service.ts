@@ -30,6 +30,15 @@ export default class AuthService implements AuthServiceInterface {
 		}
 	}
 
+	public static getAuthUrl(provider: AuthProvider): string {
+		switch (provider) {
+			case AuthProvider.GOOGLE:
+				return 'https://accounts.google.com/o/oauth2/v2/auth'
+			case AuthProvider.GITHUB:
+				return 'https://github.com/login/oauth/authorize'
+		}
+	}
+
 	public async verifyState(paramState: string): Promise<boolean> {
 		const cookieStore = await cookies()
 		const storedState = cookieStore.get(STATE_COOKIE_KEY)?.value

@@ -1,7 +1,10 @@
 import AuthService from '@/features/auth/auth.service'
+import { AuthProvider } from '@/features/auth/auth.service.interface'
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
+export async function GET(request: Request, { params }: { params: Promise<{ provider: string }> }) {
+	const provider: AuthProvider = (await params).provider as AuthProvider
+
 	const url = new URL(request.url)
 	const code = url.searchParams.get('code')
 	const state = url.searchParams.get('state')
@@ -12,7 +15,7 @@ export async function GET(request: Request) {
 	}
 
 	const queryParams = new URLSearchParams({ code })
-	const requestUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google?${queryParams.toString()}`
+	const requestUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/oauth/${provider}?${queryParams.toString()}`
 	console.log('Request URL:', requestUrl)
 	const response = await fetch(requestUrl, {
 		method: 'POST',
