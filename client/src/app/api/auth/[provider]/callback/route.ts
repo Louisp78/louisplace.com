@@ -2,12 +2,17 @@ import AuthService from '@/features/auth/auth.service'
 import { AuthProvider } from '@/features/auth/auth.service.interface'
 import { NextResponse } from 'next/server'
 
+const PARAM_CODE = 'code'
+const PARAM_STATE = 'state'
+
+const HEADER_SET_COOKIE = 'Set-Cookie'
+
 export async function GET(request: Request, { params }: { params: Promise<{ provider: string }> }) {
 	const provider: AuthProvider = (await params).provider as AuthProvider
 
 	const url = new URL(request.url)
-	const code = url.searchParams.get('code')
-	const state = url.searchParams.get('state')
+	const code = url.searchParams.get(PARAM_CODE)
+	const state = url.searchParams.get(PARAM_STATE)
 
 	const stateCheck = await new AuthService().verifyState(state || '')
 	if (!stateCheck || !code) {
@@ -30,7 +35,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ prov
 
 	const setCookieHeaders = response.headers.getSetCookie()
 	setCookieHeaders.forEach((cookie) => {
-		redirectResponse.headers.append('Set-Cookie', cookie)
+		redirectResponse.headers.append(HEADER_SET_COOKIE, cookie)
 	})
 
 	return redirectResponse
