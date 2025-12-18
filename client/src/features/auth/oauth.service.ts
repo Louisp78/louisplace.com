@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
-import IOAuthService, { AuthProvider } from './oauth.service.interface'
 import crypto from 'crypto'
+import IOAuthService from './oauth.service.interface'
+import { AuthProvider } from './auth-provider.enum'
 
 const STATE_COOKIE_MAX_AGE = 10 * 60
 const STATE_COOKIE_KEY = 'oauth_state'
