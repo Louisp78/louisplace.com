@@ -1,6 +1,5 @@
 package com.louisplace.backend.features.auth.auth_service;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -13,21 +12,15 @@ import com.louisplace.backend.features.user.IUserRepository;
 public class AuthService implements IAuthProvider {
 
     private final IUserRepository userRepository;
-    private final List<IAuthStragegy> strategies;
+    private final IAuthStragegy strategy;
 
-    public AuthService(IUserRepository userRepository, List<IAuthStragegy> strategies) {
+    public AuthService(IUserRepository userRepository, IAuthStragegy strategy) {
         this.userRepository = userRepository;
-        this.strategies = strategies;
+        this.strategy = strategy;
     }
 
     @Override
-    public UserEntity authenticate(String strategyType, String identifier, String credential) {
-        IAuthStragegy strategy = strategies.stream()
-                .filter(s -> s.supports(strategyType))
-                .findFirst()
-                .orElseThrow(
-                        () -> new IllegalArgumentException("Unsupported authentication strategy: " + strategyType));
-
+    public UserEntity authenticate(String identifier, String credential) {
         Map<String, Object> userInfo = strategy.authenticate(identifier, credential);
 
         String name = (String) userInfo.get("name");

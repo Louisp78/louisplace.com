@@ -29,7 +29,7 @@ public class AuthController {
         @PostMapping("/oauth/{provider}")
         public ResponseEntity<UserDTO> auth(@PathVariable String provider, @RequestParam String code,
                         HttpServletRequest request) {
-                UserEntity user = authService.authenticate("OAUTH", provider, code);
+                UserEntity user = authService.authenticate(provider, code);
 
                 SecurityContext securityContext = sessionService.getSession(user.getEmail());
 
