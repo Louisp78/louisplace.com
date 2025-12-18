@@ -2,6 +2,7 @@ package com.louisplace.backend.features.auth.auth_strategy;
 
 import java.util.Map;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -44,20 +45,22 @@ public class OAuthStrategy implements IAuthStragegy {
                 formData.add(PARAM_REDIRECT_URI, oAuthConfig.getRedirectUri(provider.getName()));
                 formData.add(PARAM_GRANT_TYPE, GRANT_TYPE_AUTH_CODE);
 
-                Map tokenResponse = webClient.post()
+                Map<String, Object> tokenResponse = webClient.post()
                                 .uri(provider.getTokenUrl())
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .body(BodyInserters.fromFormData(formData))
                                 .retrieve()
-                                .bodyToMono(Map.class)
+                                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                                })
                                 .block();
                 String accessToken = (String) tokenResponse.get(FIELD_ACCESS_TOKEN);
 
-                Map userInfo = webClient.get()
+                Map<String, Object> userInfo = webClient.get()
                                 .uri(provider.getUserInfoUrl())
                                 .headers(headers -> headers.setBearerAuth(accessToken))
                                 .retrieve()
-                                .bodyToMono(Map.class)
+                                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                                })
                                 .block();
 
                 return Map.of(
