@@ -4,22 +4,39 @@ import IPostService from './post.service.interface'
 import postContainer from './post.container'
 
 export default class PostService implements IPostService {
-	public posts: PostData[] = []
-
 	private repository = postContainer.repository()
+	private postsCache: PostData[] | null = null
 
-	constructor() {
-		this.getPosts().then((posts) => {
-			this.posts = posts
+	public async getPosts(): Promise<PostData[]> {
+		if (this.postsCache) {
+			return this.postsCache
+		}
+
+		const posts = await this.repository.getPosts()
+		if (!posts) {
+			this.postsCache = []
+			return []
+		}
+
+		this.postsCache = posts.sort((a, b) => {
+			return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
 		})
+
+		return this.postsCache
 	}
 
-	public getPostFromSlug(slug: string): PostData | undefined {
-		return this.posts.find((post) => post.metadata.slug === slug)
+	public async getPostFromSlug(slug: string): Promise<PostData | undefined> {
+		const posts = await this.getPosts()
+		return posts.find((post) => post.metadata.slug === slug)
 	}
 
-	public getMetadataFromSlug(slug: string): Metadata {
-		const postData = this.getPostFromSlug(slug)!
+	public async getMetadataFromSlug(slug: string): Promise<Metadata | undefined> {
+		const postData = await this.getPostFromSlug(slug)
+
+		if (!postData) {
+			return undefined
+		}
+
 		return {
 			title: postData.metadata.title,
 			description: postData.metadata.summary,
@@ -32,17 +49,5 @@ export default class PostService implements IPostService {
 				images: postData.metadata.image.src,
 			},
 		}
-	}
-
-	private async getPosts(): Promise<PostData[]> {
-		const posts = await this.repository.getPosts()
-		if (!posts) {
-			return []
-		}
-
-		posts.sort((a, b) => {
-			return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
-		})
-		return posts
 	}
 }
