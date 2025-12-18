@@ -1,12 +1,8 @@
-import PostCard from '@/features/post/components/post-card'
-import { PostData, PostMetadata } from '@/features/post/post'
-import PostService from '@/features/post/post.service'
+import { PostCard, postContainer, PostData, PostMetadata } from '@/features/post'
 import { addDays } from '@/utils/date'
 
 export default async function PostsPage() {
-	const postMetadata = (await PostService.getInstance()).posts.map(
-		(post: PostData) => post.metadata
-	)
+	const postMetadata = postContainer.service().posts.map((post: PostData) => post.metadata)
 
 	return (
 		<main className="flex-1 p-5">

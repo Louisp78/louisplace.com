@@ -1,8 +1,8 @@
 import Footer from '@/components/footer'
 import TEXT from '@/constants/text'
+import fontService from '@/font/font.service'
 import type { Metadata } from 'next'
 import './globals.css'
-import fontService from '@/features/font/font.service'
 
 export const metadata: Metadata = {
 	title: TEXT.metadata.title,

@@ -1,4 +1,4 @@
-import IStorageService from '@/features/storage/storage.service.interface'
+import { IStorageService } from '@/features/storage'
 import path from 'path'
 import { PostData } from '../post'
 import IPostRepository from './post.repository.interface'

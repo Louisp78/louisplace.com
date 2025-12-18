@@ -1,5 +1,4 @@
-import AuthService from '@/features/auth/auth.service'
-import { AuthProvider } from '@/features/auth/auth.service.interface'
+import { authContainer, AuthProvider } from '@/features/auth'
 import { NextResponse } from 'next/server'
 
 const PARAM_CODE = 'code'
@@ -14,20 +13,18 @@ export async function GET(request: Request, { params }: { params: Promise<{ prov
 	const code = url.searchParams.get(PARAM_CODE)
 	const state = url.searchParams.get(PARAM_STATE)
 
-	const stateCheck = await new AuthService().verifyState(state || '')
+	const stateCheck = authContainer.service().verifyState(state || '')
 	if (!stateCheck || !code) {
 		return NextResponse.redirect(new URL('/?error=no_code', request.url))
 	}
 
 	const queryParams = new URLSearchParams({ code })
 	const requestUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/oauth/${provider}?${queryParams.toString()}`
-	console.log('Request URL:', requestUrl)
 	const response = await fetch(requestUrl, {
 		method: 'POST',
 	})
 
 	if (!response.ok) {
-		console.error('Backend auth failed:', response.status)
 		return NextResponse.redirect(new URL('/?error=auth_failed', request.url))
 	}
 

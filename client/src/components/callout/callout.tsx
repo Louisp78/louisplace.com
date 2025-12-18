@@ -1,6 +1,6 @@
-import { CalloutStyle } from '@/features/post/post'
 import { parseMarkdown } from '@/utils/markdown'
 
+type CalloutStyle = 'info' | 'warning' | 'error' | 'success'
 type CalloutProps = {
 	title: string
 	content: string

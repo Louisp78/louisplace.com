@@ -1,4 +1,4 @@
-import { PostData } from '@/features/post/post'
+import { PostData } from '../post'
 import { Metadata } from 'next'
 import IPostService from './post.service.interface'
 import postContainer from './post.container'

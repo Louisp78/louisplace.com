@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import AuthServiceInterface, { AuthProvider } from './auth.service.interface'
+import IOAuthService, { AuthProvider } from './oauth.service.interface'
 import crypto from 'crypto'
 
 const STATE_COOKIE_MAX_AGE = 10 * 60
@@ -13,8 +13,25 @@ const GITHUB_SCOPES = ['read:user', 'user:email']
 const GOOGLE_AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
 const GITHUB_AUTH_URL = 'https://github.com/login/oauth/authorize'
 
-export default class AuthService implements AuthServiceInterface {
-	public async getParams(provider: AuthProvider): Promise<URLSearchParams> {
+export default class OAuthService implements IOAuthService {
+	public async verifyState(paramState: string): Promise<boolean> {
+		const cookieStore = await cookies()
+		const storedState = cookieStore.get(STATE_COOKIE_KEY)?.value
+
+		const result = !!paramState && !!storedState && paramState === storedState
+		if (result) {
+			cookieStore.delete(STATE_COOKIE_KEY)
+		}
+
+		return result
+	}
+
+	public async getAuthCodeUrlWithParams(provider: AuthProvider): Promise<string> {
+		const params = await this.getParams(provider)
+		return `${OAuthService.getAuthBaseUrl(provider)}?${params.toString()}`
+	}
+
+	private async getParams(provider: AuthProvider): Promise<URLSearchParams> {
 		const state = this.generateState()
 		await this.storeState(state)
 
@@ -38,25 +55,13 @@ export default class AuthService implements AuthServiceInterface {
 		}
 	}
 
-	public static getAuthUrl(provider: AuthProvider): string {
+	private static getAuthBaseUrl(provider: AuthProvider): string {
 		switch (provider) {
 			case AuthProvider.GOOGLE:
 				return GOOGLE_AUTH_URL
 			case AuthProvider.GITHUB:
 				return GITHUB_AUTH_URL
 		}
-	}
-
-	public async verifyState(paramState: string): Promise<boolean> {
-		const cookieStore = await cookies()
-		const storedState = cookieStore.get(STATE_COOKIE_KEY)?.value
-
-		const result = !!paramState && !!storedState && paramState === storedState
-		if (result) {
-			cookieStore.delete(STATE_COOKIE_KEY)
-		}
-
-		return result
 	}
 
 	private generateState(): string {
