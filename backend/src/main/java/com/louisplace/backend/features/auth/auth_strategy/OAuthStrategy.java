@@ -40,9 +40,9 @@ public class OAuthStrategy implements IAuthStragegy {
                 OAuthProviderEnum provider = OAuthProviderEnum.fromString(identifier);
                 MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
                 formData.add(PARAM_CODE, credential);
-                formData.add(PARAM_CLIENT_ID, oAuthConfig.getClientId(provider.getName()));
-                formData.add(PARAM_CLIENT_SECRET, oAuthConfig.getClientSecret(provider.getName()));
-                formData.add(PARAM_REDIRECT_URI, oAuthConfig.getRedirectUri(provider.getName()));
+                formData.add(PARAM_CLIENT_ID, oAuthConfig.getClientId(provider));
+                formData.add(PARAM_CLIENT_SECRET, oAuthConfig.getClientSecret(provider));
+                formData.add(PARAM_REDIRECT_URI, oAuthConfig.getRedirectUri(provider));
                 formData.add(PARAM_GRANT_TYPE, GRANT_TYPE_AUTH_CODE);
 
                 Map<String, Object> tokenResponse = webClient.post()

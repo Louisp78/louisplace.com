@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import com.louisplace.backend.features.auth.OAuthProviderEnum;
+
 @Configuration
 @Getter
 public class OAuthConfig {
@@ -26,27 +28,27 @@ public class OAuthConfig {
     @Value("${oauth.github.redirect-uri}")
     private String githubRedirectUri;
 
-    public String getClientId(String provider) {
-        return switch (provider.toLowerCase()) {
-            case "google" -> googleClientId;
-            case "github" -> githubClientId;
-            default -> throw new IllegalArgumentException("Unsupported provider: " + provider);
+    public String getClientId(OAuthProviderEnum provider) {
+        return switch (provider) {
+            case GOOGLE -> googleClientId;
+            case GITHUB -> githubClientId;
+            default -> throw new IllegalArgumentException("Unsupported provider: " + provider.getName());
         };
     }
 
-    public String getClientSecret(String provider) {
-        return switch (provider.toLowerCase()) {
-            case "google" -> googleClientSecret;
-            case "github" -> githubClientSecret;
-            default -> throw new IllegalArgumentException("Unsupported provider: " + provider);
+    public String getClientSecret(OAuthProviderEnum provider) {
+        return switch (provider) {
+            case GOOGLE -> googleClientSecret;
+            case GITHUB -> githubClientSecret;
+            default -> throw new IllegalArgumentException("Unsupported provider: " + provider.getName());
         };
     }
 
-    public String getRedirectUri(String provider) {
-        return switch (provider.toLowerCase()) {
-            case "google" -> googleRedirectUri;
-            case "github" -> githubRedirectUri;
-            default -> throw new IllegalArgumentException("Unsupported provider: " + provider);
+    public String getRedirectUri(OAuthProviderEnum provider) {
+        return switch (provider) {
+            case GOOGLE -> googleRedirectUri;
+            case GITHUB -> githubRedirectUri;
+            default -> throw new IllegalArgumentException("Unsupported provider: " + provider.getName());
         };
     }
 }
