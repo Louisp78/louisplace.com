@@ -1,6 +1,5 @@
 package com.louisplace.backend.features.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
@@ -20,11 +19,13 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/auth")
 public class AuthController {
 
-        @Autowired
-        private AuthService authService;
+        private final AuthService authService;
+        private final SessionService sessionService;
 
-        @Autowired
-        private SessionService sessionService;
+        public AuthController(AuthService authService, SessionService sessionService) {
+                this.authService = authService;
+                this.sessionService = sessionService;
+        }
 
         @PostMapping("/oauth/{provider}")
         public ResponseEntity<UserDTO> auth(@PathVariable String provider, @RequestParam String code,

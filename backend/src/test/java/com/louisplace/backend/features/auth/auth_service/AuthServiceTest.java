@@ -38,7 +38,7 @@ class AuthServiceTest {
             String authorizationCode = "google_auth_code_123";
 
             // When
-            UserEntity user = authService.authenticate("OAUTH", "google", authorizationCode);
+            UserEntity user = authService.authenticate("google", authorizationCode);
 
             // Then
             assertNotNull(user);
@@ -53,7 +53,7 @@ class AuthServiceTest {
             String authorizationCode = "github_auth_code_456";
 
             // When
-            UserEntity result = authService.authenticate("OAUTH", "github", authorizationCode);
+            UserEntity result = authService.authenticate("github", authorizationCode);
 
             // Then
             assertNotNull(result);
