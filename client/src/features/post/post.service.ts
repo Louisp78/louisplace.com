@@ -1,23 +1,17 @@
 import { PostData } from '@/features/post/post'
 import { Metadata } from 'next'
-import PostServiceInterface from './post.service.interface'
-import postRepositoryFactory from './repository/post.repository.factory'
+import IPostService from './post.service.interface'
+import postContainer from './post.container'
 
-export default class PostService implements PostServiceInterface {
+export default class PostService implements IPostService {
 	public posts: PostData[] = []
 
-	private repository = postRepositoryFactory()
+	private repository = postContainer.repository()
 
-	private static instance: PostService
-
-	private constructor() {}
-
-	public static async getInstance(): Promise<PostService> {
-		if (!PostService.instance) {
-			PostService.instance = new PostService()
-			PostService.instance.posts = await PostService.instance.getPosts()
-		}
-		return PostService.instance
+	constructor() {
+		this.getPosts().then((posts) => {
+			this.posts = posts
+		})
 	}
 
 	public getPostFromSlug(slug: string): PostData | undefined {
