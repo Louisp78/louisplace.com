@@ -1,12 +1,12 @@
-import StorageServiceInterface from '@/features/storage/storage.service.interface'
+import { IStorageService } from '@/features/storage'
 import path from 'path'
 import { PostData } from '../post'
-import PostRepositoryInterface from './post.repository.interface'
+import IPostRepository from './post.repository.interface'
 
 const POSTS_PATH = path.join(process.cwd(), 'src/features/post/data')
 
-export default class PostRepository implements PostRepositoryInterface {
-	public constructor(private storage: StorageServiceInterface) {}
+export default class PostRepository implements IPostRepository {
+	public constructor(private storage: IStorageService) {}
 
 	async getPosts(): Promise<PostData[]> {
 		const postFileList = this.storage.getAll(POSTS_PATH)

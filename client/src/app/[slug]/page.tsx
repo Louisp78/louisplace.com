@@ -1,25 +1,25 @@
-import Post from '@/features/post/components/post'
-import { PostData } from '@/features/post/post'
-import PostService from '@/features/post/post.service'
+import { Post, postContainer, PostData } from '@/features/post'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 interface PostPage {
 	params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: PostPage): Promise<Metadata> {
+export async function generateMetadata({ params }: PostPage): Promise<Metadata | undefined> {
 	const { slug } = await params
-	const metadata: Metadata = await PostService.getInstance().then(
-		(service) => service.getMetadataFromSlug(slug)!
-	)
+	const metadata: Metadata | undefined = await postContainer.service().getMetadataFromSlug(slug)
+
 	return metadata
 }
 
 export default async function BlogPost({ params }: PostPage) {
 	const { slug } = await params
-	const postData: PostData = await PostService.getInstance().then(
-		(service) => service.getPostFromSlug(slug)!
-	)
+	const postData: PostData | undefined = await postContainer.service().getPostFromSlug(slug)!
+
+	if (!postData) {
+		notFound()
+	}
 
 	return <Post post={postData} />
 }

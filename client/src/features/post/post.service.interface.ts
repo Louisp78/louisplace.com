@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { PostData } from './post'
 
-export default interface PostServiceInterface {
-	posts: PostData[]
-	getPostFromSlug(slug: string): PostData | undefined
-	getMetadataFromSlug(slug: string): Metadata
+export default interface IPostService {
+	getPosts(): Promise<PostData[]>
+	getPostFromSlug(slug: string): Promise<PostData | undefined>
+	getMetadataFromSlug(slug: string): Promise<Metadata | undefined>
 }

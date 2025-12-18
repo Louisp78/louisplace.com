@@ -1,6 +1,6 @@
 import { parseMarkdown } from '@/utils/markdown'
 import Quote from '../../../components/quote'
-import { PostDataContent } from '@/features/post/post'
+import { PostDataContent } from '../post'
 import Callout from '../../../components/callout/callout'
 import { generateHash } from '@/utils/string'
 

@@ -1,31 +1,42 @@
-import { PostData } from '@/features/post/post'
+import { PostData } from '../post'
 import { Metadata } from 'next'
-import PostServiceInterface from './post.service.interface'
-import PostRepositoryFactory from './repository/post.repository.factory'
+import IPostService from './post.service.interface'
+import postContainer from './post.container'
 
-export default class PostService implements PostServiceInterface {
-	public posts: PostData[] = []
+export default class PostService implements IPostService {
+	private repository = postContainer.repository()
+	private postsCache: PostData[] | null = null
 
-	private repository = PostRepositoryFactory.create()
-
-	private static instance: PostService
-
-	private constructor() {}
-
-	public static async getInstance(): Promise<PostService> {
-		if (!PostService.instance) {
-			PostService.instance = new PostService()
-			PostService.instance.posts = await PostService.instance.getPosts()
+	public async getPosts(): Promise<PostData[]> {
+		if (this.postsCache) {
+			return this.postsCache
 		}
-		return PostService.instance
+
+		const posts = await this.repository.getPosts()
+		if (!posts) {
+			this.postsCache = []
+			return []
+		}
+
+		this.postsCache = posts.sort((a, b) => {
+			return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
+		})
+
+		return this.postsCache
 	}
 
-	public getPostFromSlug(slug: string): PostData | undefined {
-		return this.posts.find((post) => post.metadata.slug === slug)
+	public async getPostFromSlug(slug: string): Promise<PostData | undefined> {
+		const posts = await this.getPosts()
+		return posts.find((post) => post.metadata.slug === slug)
 	}
 
-	public getMetadataFromSlug(slug: string): Metadata {
-		const postData = this.getPostFromSlug(slug)!
+	public async getMetadataFromSlug(slug: string): Promise<Metadata | undefined> {
+		const postData = await this.getPostFromSlug(slug)
+
+		if (!postData) {
+			return undefined
+		}
+
 		return {
 			title: postData.metadata.title,
 			description: postData.metadata.summary,
@@ -38,17 +49,5 @@ export default class PostService implements PostServiceInterface {
 				images: postData.metadata.image.src,
 			},
 		}
-	}
-
-	private async getPosts(): Promise<PostData[]> {
-		const posts = await this.repository.getPosts()
-		if (!posts) {
-			return []
-		}
-
-		posts.sort((a, b) => {
-			return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
-		})
-		return posts
 	}
 }

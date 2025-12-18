@@ -1,5 +1,3 @@
-export type CalloutStyle = 'info' | 'warning' | 'error' | 'success'
-
 export type PostDataContent =
 	| {
 			type: 'title'

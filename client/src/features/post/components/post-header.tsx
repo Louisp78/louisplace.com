@@ -1,4 +1,4 @@
-import { PostData } from '@/features/post/post'
+import { PostData } from '../post'
 import { parseMarkdown } from '@/utils/markdown'
 import Image from 'next/image'
 import Quote from '../../../components/quote'

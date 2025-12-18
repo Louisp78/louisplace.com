@@ -1,4 +1,4 @@
-import { PostData } from '@/features/post/post'
+import { PostData } from '@/features/post'
 import PostContent from './post-content'
 import PostHeader from './post-header'
 

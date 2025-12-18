@@ -5,17 +5,44 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    # To use Let's Encrypt certificates, please ensure you have them in /etc/letsencrypt on the host machine
-    # if not use certbot or another method to obtain them.
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ./apache/conf:/usr/local/apache2/conf/extra:ro
     depends_on:
-      - app
+      - client
 
-  app:
+  client:
     build: ./client
     container_name: next_app
+    ports:
+      - "3000:3000"
     environment:
       NODE_ENV: production
     restart: always
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: spring_boot_app
+    env_file:
+      - backend/.env
+      - ./.env.db
+      - ./.env.oauth
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:18-alpine
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env.db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
