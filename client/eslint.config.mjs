@@ -29,6 +29,17 @@ const eslintConfig = [
 		rules: {
 			'no-console': 'error',
 			'prettier/prettier': 'error',
+			'no-restricted-imports': [
+            	'error',
+					{
+						patterns: [
+							{
+                				group: ['@/features/*/*', '!@/features/*/index'],								
+								message: 'Import from feature barrel file (@/features/*/index) instead.',
+							},
+						],
+					},
+        	],
 		},
 	},
 	{
