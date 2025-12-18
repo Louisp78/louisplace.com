@@ -1,12 +1,12 @@
 import { PostData } from '@/features/post/post'
 import { Metadata } from 'next'
 import PostServiceInterface from './post.service.interface'
-import PostRepositoryFactory from './repository/post.repository.factory'
+import postRepositoryFactory from './repository/post.repository.factory'
 
 export default class PostService implements PostServiceInterface {
 	public posts: PostData[] = []
 
-	private repository = PostRepositoryFactory.create()
+	private repository = postRepositoryFactory()
 
 	private static instance: PostService
 

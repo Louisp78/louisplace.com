@@ -1,9 +1,10 @@
 import FileStorageService from '@/features/storage/file-storage.service'
 import PostRepository from './post.repository'
-import PostRepositoryInterface from './post.repository.interface'
+import IPostRepository from './post.repository.interface'
 
-export default class PostRepositoryFactory {
-	static create(): PostRepositoryInterface {
-		return new PostRepository(new FileStorageService())
-	}
+const postRepositoryFactory = (): IPostRepository => {
+	const storageService = new FileStorageService()
+	return new PostRepository(storageService)
 }
+
+export default postRepositoryFactory
