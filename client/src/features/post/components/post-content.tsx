@@ -11,30 +11,22 @@ export default function PostContent({ component }: { component: PostDataContent 
 	}
 
 	switch (component.type) {
-		case 'paragraph':
+		case 'spaced-content':
 			return (
 				<div className="mb-6">
 					<PostContent component={component.data.content} />
 				</div>
 			)
 		case 'title':
-			return (
-				<h2 className="mb-4 text-2xl font-semibold">
-					<PostContent component={component.data.content} />
-				</h2>
-			)
+			return <h2 className="mb-4 text-2xl font-semibold">{component.data.text}</h2>
 
 		case 'subtitle':
-			return (
-				<h3 className="mb-3 text-xl font-semibold">
-					<PostContent component={component.data.content} />
-				</h3>
-			)
+			return <h3 className="mb-3 text-xl font-semibold">{component.data.text}</h3>
 
 		case 'callout':
 			return (
 				<Callout
-					title={component.data.title}
+					header={component.data.header}
 					content={component.data.content}
 					style={component.data.style}
 				/>
@@ -43,9 +35,9 @@ export default function PostContent({ component }: { component: PostDataContent 
 		case 'ul':
 			return (
 				<div className="mb-8">
-					{component.data.title && (
+					{component.data.header && (
 						<div className="mb-2">
-							<PostContent component={component.data.title} />
+							<PostContent component={component.data.header} />
 						</div>
 					)}
 					<ul className="space-y-2">

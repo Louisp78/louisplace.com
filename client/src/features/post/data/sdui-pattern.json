@@ -12,19 +12,25 @@
 		"author": "Louis Place",
 		"publishedAt": "2025-11-04T00:00:00Z",
 		"category": "Software Architecture",
-		"tags": ["Software Architecture", "Development Pattern"]
+		"tags": ["Software Architecture", "Development Pattern"],
+		"estimatedReadingTimeMinutes": 4
 	},
 	"content": [
 		{
-			"type": "paragraph",
+			"type": "spaced-content",
 			"data": {
-				"text": "During my current internship, I discovered a super powerful pattern: **SDUI** — Server Driven UI Pattern."
+				"content": "During my current internship, I discovered a super powerful pattern: **SDUI** — Server Driven UI Pattern."
 			}
 		},
 		{
 			"type": "callout",
 			"data": {
-				"title": "The idea?",
+				"header": {
+					"type": "title",
+					"data": {
+						"text": "The idea?"
+					}
+				},
 				"content": "👉 **The backend controls the interface**: it sends a structure (often in JSON) that the frontend interprets to dynamically display the right components.",
 				"style": "info"
 			}
@@ -32,7 +38,12 @@
 		{
 			"type": "ul",
 			"data": {
-				"title": "🎯 **Why is it useful?**",
+				"header": {
+					"type": "title",
+					"data": {
+						"text": "🎯 Why is it useful?"
+					}
+				},
 				"items": [
 					"No need to redeploy the app to change the UI ✅",
 					"In a mobile context, product teams can make **instant adjustments** without waiting for store validation cycles 📱",
@@ -44,14 +55,14 @@
 		{
 			"type": "quote",
 			"data": {
-				"text": "⏳ This way, you bypass long mobile deployment procedures while keeping very fine control over the user experience.",
+				"content": "⏳ This way, you bypass long mobile deployment procedures while keeping very fine control over the user experience.",
 				"highlight": true
 			}
 		},
 		{
-			"type": "paragraph",
+			"type": "spaced-content",
 			"data": {
-				"text": "And you know what? This pattern is used for displaying this very post! The backend sends a JSON structure that my Next.js frontend interprets to render the components you see here."
+				"content": "And you know what? This pattern is used for displaying this very post! The backend sends a JSON structure that my Next.js frontend interprets to render the components you see here."
 			}
 		}
 	]

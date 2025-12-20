@@ -2,11 +2,11 @@ export type PostDataContent =
 	| {
 			type: 'title'
 			data: {
-				content: PostDataContent
+				text: string
 			}
 	  }
 	| {
-			type: 'paragraph'
+			type: 'spaced-content'
 			data: {
 				content: PostDataContent
 			}
@@ -14,13 +14,13 @@ export type PostDataContent =
 	| {
 			type: 'subtitle'
 			data: {
-				content: PostDataContent
+				text: string
 			}
 	  }
 	| {
 			type: 'callout'
 			data: {
-				title: string
+				header: PostDataContent | null
 				content: PostDataContent
 				style: CalloutStyle
 			}
@@ -28,7 +28,7 @@ export type PostDataContent =
 	| {
 			type: 'ul'
 			data: {
-				title: PostDataContent | null
+				header: PostDataContent | null
 				items: PostDataContent[]
 			}
 	  }

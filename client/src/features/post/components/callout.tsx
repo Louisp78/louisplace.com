@@ -3,7 +3,7 @@ import PostContent from './post-content'
 
 type CalloutStyle = 'info' | 'warning' | 'error' | 'success'
 type CalloutProps = {
-	title: string
+	header: PostDataContent | null
 	content: PostDataContent
 	style: CalloutStyle
 }
@@ -11,7 +11,7 @@ type CalloutProps = {
 export default function Callout(props: CalloutProps) {
 	return (
 		<div className={`mb-6 rounded-lg p-6 ${getCalloutStyle(props.style)}`}>
-			<h3 className="mb-2 font-semibold">{props.title}</h3>
+			{props.header && <PostContent component={props.header} />}
 			<PostContent component={props.content} />
 		</div>
 	)

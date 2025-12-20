@@ -12,39 +12,50 @@
 		"publishedAt": "2025-11-04T00:00:00Z",
 		"author": "Louis Place",
 		"category": "Mobile Development",
-		"tags": ["Expo", "React Native", "iOS", "Native Development", "Mobile"]
+		"tags": ["Expo", "React Native", "iOS", "Native Development", "Mobile"],
+		"estimatedReadingTimeMinutes": 5
 	},
 	"content": [
 		{
 			"type": "callout",
 			"data": {
-				"title": "The Evolution of Expo",
+				"header": {
+					"type": "title",
+					"data": {
+						"text": "The Evolution of Expo"
+					}
+				},
 				"content": "For a long time, people thought Expo was only for small apps or beginner developers. But that paradigm is now outdated: limitations have become the exception, not the rule.",
 				"style": "warning"
 			}
 		},
 		{
-			"type": "paragraph",
+			"type": "spaced-content",
 			"data": {
-				"text": "💡 Even though Expo Core provides powerful and mature tools—like the brand new **Expo Router v5**, which I find particularly impressive—sometimes you need access to platform-specific native features: iOS widgets, system sensors, advanced audio modules…"
+				"content": "💡 Even though Expo Core provides powerful and mature tools—like the brand new **Expo Router v5**, which I find particularly impressive—sometimes you need access to platform-specific native features: iOS widgets, system sensors, advanced audio modules…"
 			}
 		},
 		{
-			"type": "paragraph",
+			"type": "spaced-content",
 			"data": {
-				"text": "🧩 That's exactly what I experienced a year ago, when integrating an iOS widget into an app for a client. At the time, I discovered you can avoid \"ejecting\" the project!"
+				"content": "🧩 That's exactly what I experienced a year ago, when integrating an iOS widget into an app for a client. At the time, I discovered you can avoid \"ejecting\" the project!"
 			}
 		},
 		{
-			"type": "paragraph",
+			"type": "spaced-content",
 			"data": {
-				"text": "👉 Thanks to the **Expo Modules API**, I was able to create a local native module in Swift, cleanly integrated into an Expo project with the Dev Client. The result: I kept all the benefits of the Expo workflow (cross-platform, EAS Build, top-notch DX) while accessing full native power."
+				"content": "👉 Thanks to the **Expo Modules API**, I was able to create a local native module in Swift, cleanly integrated into an Expo project with the Dev Client. The result: I kept all the benefits of the Expo workflow (cross-platform, EAS Build, top-notch DX) while accessing full native power."
 			}
 		},
 		{
 			"type": "callout",
 			"data": {
-				"title": "📜 A bit of history:",
+				"header": {
+					"type": "title",
+					"data": {
+						"text": "📜 A bit of history:"
+					}
+				},
 				"content": "The Expo Modules API was introduced in July 2021 with Expo SDK 42. With the stable release of EAS Build in 2022, the framework took a major turn: this API lets you write native code via Dev Client without ejecting—which used to be the only option for custom native code.",
 				"style": "info"
 			}
@@ -52,7 +63,7 @@
 		{
 			"type": "quote",
 			"data": {
-				"text": "⚠️ The classic fear (\"Expo can't do X\") almost always means today: → \"It requires a dev build or a plugin,\" → not \"it's impossible.\"",
+				"content": "⚠️ The classic fear (\"Expo can't do X\") almost always means today: → \"It requires a dev build or a plugin,\" → not \"it's impossible.\"",
 				"highlight": true
 			}
 		}
