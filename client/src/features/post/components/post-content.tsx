@@ -7,7 +7,7 @@ import PostLink from './post-link'
 
 export default function PostContent({ component }: { component: PostDataContent }) {
 	if (typeof component === 'string') {
-		return <p dangerouslySetInnerHTML={{ __html: parseInlineMarkdown(component) }}></p>
+		return <p dangerouslySetInnerHTML={{ __html: parseInlineMarkdown(component) }} />
 	}
 
 	switch (component.type) {
@@ -18,10 +18,10 @@ export default function PostContent({ component }: { component: PostDataContent 
 				</div>
 			)
 		case 'title':
-			return <h2 className="mb-4 text-2xl font-semibold">{component.data.text}</h2>
+			return <h2 className="mb-4 font-semibold">{component.data.text}</h2>
 
 		case 'subtitle':
-			return <h3 className="mb-3 text-xl font-semibold">{component.data.text}</h3>
+			return <h3 className="font-semibold">{component.data.text}</h3>
 
 		case 'callout':
 			return (

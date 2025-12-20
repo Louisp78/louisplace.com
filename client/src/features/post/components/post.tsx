@@ -4,7 +4,7 @@ import PostHeader from './post-header'
 
 export default function Post({ post }: { post: PostData }) {
 	return (
-		<article className="mx-auto max-w-4xl px-6 pt-8 pb-28">
+		<article className="mx-auto flex max-w-screen flex-col px-4 pt-8 pb-12 md:max-w-2xl md:px-0 md:pb-28 lg:max-w-4xl lg:px-0">
 			<PostHeader post={post} />
 			<section>
 				{post.content.map((component, index) => (
