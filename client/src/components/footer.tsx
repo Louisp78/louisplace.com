@@ -5,10 +5,10 @@ import SPACING from '@/constants/spacing'
 export default function Footer() {
 	return (
 		<footer className="border-t-[0.5px] border-gray-300 p-5 text-center text-sm text-gray-500">
-			<p>{TEXT.footer.copyright}</p>
-			<p>{TEXT.footer.technologies}</p>
+			<span className="text-xs md:text-sm">{TEXT.footer.copyright}</span>
+			<span className="text-xs md:text-sm">{TEXT.footer.technologies}</span>
 			<a
-				className="inline-flex items-center gap-3 hover:underline"
+				className="inline-flex items-center gap-3 text-blue-700"
 				href={TEXT.github.url}
 				target="_blank"
 				rel="noopener noreferrer"

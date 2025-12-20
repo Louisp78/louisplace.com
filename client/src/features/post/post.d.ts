@@ -6,7 +6,13 @@ export type PostDataContent =
 			}
 	  }
 	| {
-			type: 'paragraph'
+			type: 'spaced-content'
+			data: {
+				content: PostDataContent
+			}
+	  }
+	| {
+			type: 'subtitle'
 			data: {
 				text: string
 			}
@@ -14,25 +20,33 @@ export type PostDataContent =
 	| {
 			type: 'callout'
 			data: {
-				title: string
-				content: string
+				header: PostDataContent | null
+				content: PostDataContent
 				style: CalloutStyle
 			}
 	  }
 	| {
 			type: 'ul'
 			data: {
-				title: string
-				items: string[]
+				header: PostDataContent | null
+				items: PostDataContent[]
 			}
 	  }
 	| {
 			type: 'quote'
 			data: {
-				text: string
+				content: PostDataContent
 				highlight: boolean
 			}
 	  }
+	| {
+			type: 'link'
+			data: {
+				href: string
+				content: string
+			}
+	  }
+	| string
 
 export interface PostMetadata {
 	title: string

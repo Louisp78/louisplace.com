@@ -28,8 +28,10 @@ export default function PostCard(props: PostCardProps) {
 							className="h-full w-full rounded-xl object-cover"
 						/>
 					</div>
-					<h2 className="pb-2 font-[Syne] text-2xl font-semibold">{props.title}</h2>
-					<p className="line-clamp-3 overflow-hidden text-ellipsis">{props.description}</p>
+					<h2 className="hover: pb-2 font-[Syne] font-semibold text-white">{props.title}</h2>
+					<p className="line-clamp-3 overflow-hidden text-ellipsis text-gray-300">
+						{props.description}
+					</p>
 				</article>
 			</div>
 		</TransitionLink>

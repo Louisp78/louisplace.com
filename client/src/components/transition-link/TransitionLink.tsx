@@ -1,8 +1,8 @@
 'use client'
 
+import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/navigation'
 import './TransitionLink.css'
-import Link, { LinkProps } from 'next/link'
 
 export interface TransitionLinkProps extends LinkProps {
 	children: React.ReactNode
@@ -23,7 +23,7 @@ export function TransitionLink({ children, href, ...props }: TransitionLinkProps
 	}
 
 	return (
-		<Link href={href} {...props} onClick={handleClick}>
+		<Link href={href} {...props} onClick={handleClick} className="hover:no-underline">
 			{children}
 		</Link>
 	)
