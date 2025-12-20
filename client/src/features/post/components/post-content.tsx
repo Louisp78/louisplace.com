@@ -1,23 +1,34 @@
-import { parseMarkdown } from '@/utils/markdown'
-import Quote from '../../../components/quote'
-import { PostDataContent } from '../post'
-import Callout from '../../../components/callout/callout'
 import { generateHash } from '@/utils/string'
+import { PostDataContent } from '../post'
+import { parseInlineMarkdown } from '../utils/markdown'
+import Callout from './callout'
+import Quote from './quote'
+import PostLink from './post-link'
 
 export default function PostContent({ component }: { component: PostDataContent }) {
+	if (typeof component === 'string') {
+		return <p dangerouslySetInnerHTML={{ __html: parseInlineMarkdown(component) }}></p>
+	}
+
 	switch (component.type) {
 		case 'paragraph':
 			return (
 				<div className="mb-6">
-					<p dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }} />
+					<PostContent component={component.data.content} />
 				</div>
 			)
 		case 'title':
 			return (
-				<h2
-					className="mb-4 text-2xl font-semibold"
-					dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.text) }}
-				/>
+				<h2 className="mb-4 text-2xl font-semibold">
+					<PostContent component={component.data.content} />
+				</h2>
+			)
+
+		case 'subtitle':
+			return (
+				<h3 className="mb-3 text-xl font-semibold">
+					<PostContent component={component.data.content} />
+				</h3>
 			)
 
 		case 'callout':
@@ -32,15 +43,16 @@ export default function PostContent({ component }: { component: PostDataContent 
 		case 'ul':
 			return (
 				<div className="mb-8">
-					<h2
-						className="mb-4 text-2xl font-semibold"
-						dangerouslySetInnerHTML={{ __html: parseMarkdown(component.data.title) }}
-					/>
+					{component.data.title && (
+						<div className="mb-2">
+							<PostContent component={component.data.title} />
+						</div>
+					)}
 					<ul className="space-y-2">
-						{component.data.items.map((item: string) => (
-							<li key={generateHash(item)} className="flex items-start">
+						{component.data.items.map((item: PostDataContent) => (
+							<li key={generateHash(item.toString())} className="flex items-start">
 								<span className="mr-2">•</span>
-								<span dangerouslySetInnerHTML={{ __html: parseMarkdown(item) }} />
+								<PostContent component={item} />
 							</li>
 						))}
 					</ul>
@@ -48,6 +60,12 @@ export default function PostContent({ component }: { component: PostDataContent 
 			)
 
 		case 'quote':
-			return <Quote highlight={component.data.highlight} text={component.data.text} />
+			return <Quote highlight={component.data.highlight} content={component.data.content} />
+		case 'link':
+			return (
+				<PostLink href={component.data.href}>
+					<PostContent component={component.data.content} />
+				</PostLink>
+			)
 	}
 }

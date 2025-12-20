@@ -1,7 +1,7 @@
-import { PostData } from '../post'
-import { parseMarkdown } from '@/utils/markdown'
 import Image from 'next/image'
-import Quote from '../../../components/quote'
+import { PostData } from '../post'
+import Quote from './quote'
+import PostContent from './post-content'
 
 export default function PostHeader({ post }: { post: PostData }) {
 	return (
@@ -11,10 +11,9 @@ export default function PostHeader({ post }: { post: PostData }) {
 				{new Date(post.metadata.publishedAt).toLocaleDateString()} •
 				{post.metadata.estimatedReadingTimeMinutes} min read
 			</header>
-			<h1
-				className="mb-8 text-4xl font-bold"
-				dangerouslySetInnerHTML={{ __html: parseMarkdown(post.metadata.title) }}
-			/>
+			<h1 className="mb-8 text-4xl font-bold">
+				<PostContent component={post.metadata.title} />
+			</h1>
 			{post.metadata.image && (
 				<div className="mb-8 flex justify-center">
 					<Image
@@ -26,7 +25,7 @@ export default function PostHeader({ post }: { post: PostData }) {
 					/>
 				</div>
 			)}
-			<Quote text={post.metadata.summary} />
+			<Quote content={post.metadata.summary} />
 		</section>
 	)
 }

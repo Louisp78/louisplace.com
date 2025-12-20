@@ -1,9 +1,10 @@
-import { parseMarkdown } from '@/utils/markdown'
+import { PostDataContent } from '../post'
+import PostContent from './post-content'
 
 type CalloutStyle = 'info' | 'warning' | 'error' | 'success'
 type CalloutProps = {
 	title: string
-	content: string
+	content: PostDataContent
 	style: CalloutStyle
 }
 
@@ -11,7 +12,7 @@ export default function Callout(props: CalloutProps) {
 	return (
 		<div className={`mb-6 rounded-lg p-6 ${getCalloutStyle(props.style)}`}>
 			<h3 className="mb-2 font-semibold">{props.title}</h3>
-			<p dangerouslySetInnerHTML={{ __html: parseMarkdown(props.content) }} />
+			<PostContent component={props.content} />
 		</div>
 	)
 }

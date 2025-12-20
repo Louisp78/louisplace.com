@@ -2,37 +2,51 @@ export type PostDataContent =
 	| {
 			type: 'title'
 			data: {
-				text: string
+				content: PostDataContent
 			}
 	  }
 	| {
 			type: 'paragraph'
 			data: {
-				text: string
+				content: PostDataContent
+			}
+	  }
+	| {
+			type: 'subtitle'
+			data: {
+				content: PostDataContent
 			}
 	  }
 	| {
 			type: 'callout'
 			data: {
 				title: string
-				content: string
+				content: PostDataContent
 				style: CalloutStyle
 			}
 	  }
 	| {
 			type: 'ul'
 			data: {
-				title: string
-				items: string[]
+				title: PostDataContent | null
+				items: PostDataContent[]
 			}
 	  }
 	| {
 			type: 'quote'
 			data: {
-				text: string
+				content: PostDataContent
 				highlight: boolean
 			}
 	  }
+	| {
+			type: 'link'
+			data: {
+				href: string
+				content: string
+			}
+	  }
+	| string
 
 export interface PostMetadata {
 	title: string

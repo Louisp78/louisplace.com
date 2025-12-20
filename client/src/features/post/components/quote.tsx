@@ -1,9 +1,10 @@
-import { parseMarkdown } from '@/utils/markdown'
+import { PostDataContent } from '../post'
+import PostContent from './post-content'
 
 export type QuoteProps =
 	| {
 			highlight?: boolean
-			text?: string
+			content?: PostDataContent
 	  }
 	| {
 			highlight?: boolean
@@ -17,9 +18,7 @@ export default function Quote(props: QuoteProps) {
 				props.highlight ? 'rounded-r-lg bg-blue-50 text-black' : ''
 			}`}
 		>
-			{'text' in props && props.text ? (
-				<p dangerouslySetInnerHTML={{ __html: parseMarkdown(props.text) }} />
-			) : null}
+			{'content' in props && props.content ? <PostContent component={props.content} /> : null}
 			{'children' in props && props.children}
 		</blockquote>
 	)
