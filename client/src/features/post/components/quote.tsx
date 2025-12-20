@@ -1,15 +1,10 @@
 import { PostDataContent } from '../post'
 import PostContent from './post-content'
 
-export type QuoteProps =
-	| {
-			highlight?: boolean
-			content?: PostDataContent
-	  }
-	| {
-			highlight?: boolean
-			children?: React.ReactNode
-	  }
+export type QuoteProps = {
+	highlight?: boolean
+	content?: PostDataContent
+}
 
 export default function Quote(props: QuoteProps) {
 	return (
@@ -19,7 +14,6 @@ export default function Quote(props: QuoteProps) {
 			}`}
 		>
 			{'content' in props && props.content ? <PostContent component={props.content} /> : null}
-			{'children' in props && props.children}
 		</blockquote>
 	)
 }
