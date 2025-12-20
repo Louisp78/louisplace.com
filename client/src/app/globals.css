@@ -50,3 +50,7 @@ p {
 header {
 	@apply text-xs md:text-sm;
 }
+
+a {
+	@apply text-blue-500 hover:underline;
+}
