@@ -1,8 +1,6 @@
-import Image from 'next/image'
 import { PostData } from '../post'
 import Quote from './quote'
-
-const DEFAULT_IMAGE_ASPECT_RATIO = '16 / 9'
+import CoverImage from './cover-image'
 
 export default function PostHeader({ post }: { post: PostData }) {
 	return (
@@ -13,25 +11,7 @@ export default function PostHeader({ post }: { post: PostData }) {
 				{` ${post.metadata.estimatedReadingTimeMinutes} min read`}
 			</header>
 			<h1 className="mb-8 font-bold">{post.metadata.title}</h1>
-			{post.metadata.image && (
-				<div className="mb-8 flex justify-center">
-					{(() => {
-						const img = post.metadata.image
-						const aspect =
-							img.width && img.height && img.height > 0
-								? `${img.width} / ${img.height}`
-								: DEFAULT_IMAGE_ASPECT_RATIO
-						return (
-							<div
-								className="w-full max-w-[100%] overflow-hidden rounded-lg shadow-lg"
-								style={{ position: 'relative', width: '100%', aspectRatio: aspect }}
-							>
-								<Image src={img.src} alt={img.alt} fill priority style={{ objectFit: 'cover' }} />
-							</div>
-						)
-					})()}
-				</div>
-			)}
+			{post.metadata.image && <CoverImage {...post.metadata.image} />}
 			<Quote content={post.metadata.summary} />
 		</section>
 	)
