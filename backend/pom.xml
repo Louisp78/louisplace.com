@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.louisplace</groupId>
 	<artifactId>backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>LouisPlaceBackendApplication</name>
 	<description>Backend API of app.louisplace.com web app</description>
 	<url />
