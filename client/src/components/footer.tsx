@@ -8,7 +8,7 @@ export default function Footer() {
 			<span className="text-xs md:text-sm">{TEXT.footer.copyright}</span>
 			<span className="text-xs md:text-sm">{TEXT.footer.technologies}</span>
 			<a
-				className="inline-flex items-center gap-3"
+				className="inline-flex items-center gap-3 text-blue-700"
 				href={TEXT.github.url}
 				target="_blank"
 				rel="noopener noreferrer"
