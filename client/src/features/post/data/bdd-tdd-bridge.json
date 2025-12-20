@@ -4,8 +4,8 @@
 		"summary": "Explore how Behavior-Driven Development (BDD) and Test-Driven Development (TDD) connect Product and Engineering, reducing ambiguity, aligning expectations, and turning product specifications into automated tests.",
 		"image": {
 			"src": "/bdd-tdd-bridge.png",
-			"width": 700,
-			"height": 1,
+			"height": 1024,
+			"width": 1536,
 			"alt": "BDD and TDD bridge illustration"
 		},
 		"slug": "bdd-tdd-bridge",
