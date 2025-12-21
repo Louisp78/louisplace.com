@@ -29,7 +29,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: cd louisplace.com/client || exit 1 &&
             git pull origin main &&
-            docker compose up --build -d client
+            docker compose up --build -d client backend
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,4 +47,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: ./louisplace.com/client/deploy.sh
+          script: ./louisplace.com/deploy.sh
