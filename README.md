@@ -1,5 +1,5 @@
 # app.louisplace.com
-
+[![Build and Deploy Pipeline](https://github.com/Louisp78/louisplace.com/actions/workflows/build_and_deploy.yml/badge.svg)](https://github.com/Louisp78/louisplace.com/actions/workflows/build_and_deploy.yml)
 - frontend (Next.js) configuration:
   - Please define a `.env` file into the client directory according to the [./client/.env.example](./client/.env.example) file
 - backend (Java Spring boot) configuration:
