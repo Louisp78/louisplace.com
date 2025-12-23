@@ -12,7 +12,8 @@
     "prettier:fix": "pnpm prettier -c -w src",
     "lint_format:check": "pnpm prettier:check && pnpm lint",
     "format": "pnpm run prettier:fix && pnpm run lint:fix",
-    "test": "jest"
+    "test": "jest",
+    "api-generate": "pnpm openapi-generator-cli generate -i $NEXT_PUBLIC_BACKEND_URL/v3/api-docs -g typescript-fetch -o ./src/features/api-repository-generated"
   },
   "dependencies": {
     "lucide-react": "^0.525.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@openapitools/openapi-generator-cli": "^2.26.0",
     "@stylistic/eslint-plugin": "^4.4.1",
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
