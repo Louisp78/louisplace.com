@@ -6,7 +6,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./apache/certs:/etc/apache2/certs:ro
       - ./apache/conf:/usr/local/apache2/conf/extra:ro
     depends_on:
       - client
