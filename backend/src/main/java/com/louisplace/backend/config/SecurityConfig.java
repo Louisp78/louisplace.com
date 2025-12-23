@@ -16,7 +16,8 @@ public class SecurityConfig {
                                                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                                 .cors(cors -> cors.configure(http))
                                 .authorizeHttpRequests(auth -> auth
-                                                .requestMatchers("/auth/**").permitAll()
+                                                .requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui/**")
+                                                .permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(session -> session
                                                 .maximumSessions(1)
