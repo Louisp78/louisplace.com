@@ -1,7 +1,55 @@
+import { HttpStatus } from '@/utils/http-status'
+
 describe('AuthContext', () => {
-	test.todo('should set user to authenticated user on login')
-	test.todo('should set user to not authenticated on logout')
-	test.todo('should persist user authentication state across sessions')
-	test.todo('should restrict access to protected routes for unauthenticated users')
-	test.todo('should not show navigation links of protected routes for unauthenticated users')
+	beforeAll(() => {})
+
+	test('should set user to authenticated user on login', () => {
+		global.fetch = jest.fn(() =>
+			Promise.resolve({
+				json: () =>
+					Promise.resolve({
+						id: 1,
+						firstName: 'Louis',
+						lastName: 'Place',
+						email: 'example@gmail.com',
+						username: 'llouisp',
+					}),
+			} as Response)
+		) as jest.Mock
+		// TODO: get the useAuth hook
+		const { user } = useAuth()
+
+		expect(user).toBeDefined()
+		expect(user.id).toBeDefined()
+	})
+	test('should set user to not authenticated on logout', () => {
+		global.fetch = jest.fn(() =>
+			Promise.resolve({
+				status: HttpStatus.Unauthorized,
+			} as Response)
+		) as jest.Mock
+
+		const { user } = useAuth()
+
+		expect(user).toBeNull()
+	})
+	test('should persist user authentication state across sessions', () => {
+		global.fetch = jest.fn(() =>
+			Promise.resolve({
+				json: () =>
+					Promise.resolve({
+						id: 1,
+						firstName: 'Louis',
+						lastName: 'Place',
+						email: 'example@gmail.com',
+						username: 'llouisp',
+					}),
+			} as Response)
+		) as jest.Mock
+
+		const { user } = useAuth()
+
+		expect(user).toBeDefined()
+		expect(localStorage.getItem('user')).toBeDefined()
+	})
 })
