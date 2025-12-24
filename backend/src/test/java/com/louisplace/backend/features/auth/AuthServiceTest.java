@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.louisplace.backend.features.auth.auth_service.AuthService;
 import com.louisplace.backend.features.auth.auth_strategy.AuthUserInfoDTO;
 import com.louisplace.backend.features.auth.auth_strategy.IAuthStragegy;
+import com.louisplace.backend.features.auth.session_service.SessionService;
 import com.louisplace.backend.features.user.IUserRepository;
 import com.louisplace.backend.features.user.UserEntity;
 
@@ -26,6 +27,9 @@ class AuthServiceTest {
 
         @Mock
         private IUserRepository userRepository;
+
+        @Mock
+        private SessionService sessionService;
 
         @InjectMocks
         private AuthService authService;
@@ -76,6 +80,18 @@ class AuthServiceTest {
 
                 assertNotNull(user);
                 assertNotNull(user.getEmail());
+        }
+
+        @Test
+        @DisplayName("Should logout user successfully")
+        void shouldLogoutUser() {
+                String email = "example@gmail.com";
+
+                when(sessionService.getPrincipal()).thenReturn(email);
+
+                Boolean result = authService.logOut(email);
+
+                assert (result);
         }
 
 }
