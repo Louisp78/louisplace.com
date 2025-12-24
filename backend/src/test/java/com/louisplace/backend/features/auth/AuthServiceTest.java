@@ -33,7 +33,6 @@ class AuthServiceTest {
         @Test
         @DisplayName("Should successfully authenticate with Google provider")
         void shouldAuthenticateWithGoogle() {
-                // Given
                 String authorizationCode = "google_auth_code_123";
                 UserEntity mockUser = new UserEntity();
                 mockUser.setEmail("test@google.com");
@@ -49,10 +48,8 @@ class AuthServiceTest {
                 when(userRepository.findByEmail("test@google.com"))
                                 .thenReturn(java.util.Optional.of(mockUser));
 
-                // When
                 UserEntity user = authService.authenticate("google", authorizationCode);
 
-                // Then
                 assertNotNull(user);
                 assertNotNull(user.getEmail());
         }
@@ -60,7 +57,6 @@ class AuthServiceTest {
         @Test
         @DisplayName("Should successfully authenticate with GitHub provider")
         void shouldAuthenticateWithGitHub() {
-                // Given
                 String authorizationCode = "github_auth_code_456";
                 UserEntity mockUser = new UserEntity();
                 mockUser.setEmail("test@github.com");
@@ -76,10 +72,8 @@ class AuthServiceTest {
                 when(userRepository.findByEmail("test@github.com"))
                                 .thenReturn(java.util.Optional.of(mockUser));
 
-                // When
                 UserEntity user = authService.authenticate("github", authorizationCode);
 
-                // Then
                 assertNotNull(user);
                 assertNotNull(user.getEmail());
         }
