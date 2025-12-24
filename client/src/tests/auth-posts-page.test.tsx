@@ -1,4 +1,5 @@
 import PostsPage from '@/app/page'
+import { HttpStatus } from '@/utils/http-status'
 import { render } from '@testing-library/react'
 
 import '@testing-library/jest-dom'
@@ -14,7 +15,7 @@ describe('Auth of Posts Page', () => {
 	test('should not display user-info icon when user is not logged in', () => {
 		global.fetch = jest.fn(() =>
 			Promise.resolve({
-				status: 403,
+				status: HttpStatus.Unauthorized,
 			} as Response)
 		) as jest.Mock
 
