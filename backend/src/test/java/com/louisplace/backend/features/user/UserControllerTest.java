@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.louisplace.backend.features.auth.session_service.SessionService;
@@ -32,7 +33,7 @@ public class UserControllerTest {
     void shouldExposeGetUserProfileEndpoint() {
         ResponseEntity<UserDTO> response = userController.getUserInfos();
 
-        Assertions.assertEquals(200, response.getStatusCode().value());
+        Assertions.assertEquals(HttpStatus.ACCEPTED, response.getStatusCode().value());
     }
 
     @Test
@@ -42,7 +43,7 @@ public class UserControllerTest {
 
         ResponseEntity<UserDTO> response = userController.getUserInfos();
 
-        Assertions.assertEquals(403, response.getStatusCode().value());
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode().value());
     }
 
     @Test
@@ -54,7 +55,7 @@ public class UserControllerTest {
 
         ResponseEntity<UserDTO> response = userController.updateUserInfos(updateUserDto);
 
-        Assertions.assertEquals(200, response.getStatusCode().value());
+        Assertions.assertEquals(HttpStatus.ACCEPTED, response.getStatusCode().value());
         Assertions.assertNotNull(response.getBody());
     }
 
@@ -67,7 +68,7 @@ public class UserControllerTest {
 
         ResponseEntity<UserDTO> response = userController.updateUserInfos(updateUserDto);
 
-        Assertions.assertEquals(403, response.getStatusCode().value());
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode().value());
     }
 
 }
