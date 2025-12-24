@@ -1,9 +1,8 @@
-import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
 
-import UserInfoPage from './user-info-page'
-import { UserDTO } from '../api-repository-generated'
 import TEXT from '@/constants/text'
+import UserInfoPage from './user-info-page'
 describe('User Info Page', () => {
 	beforeEach(() => {
 		global.fetch = jest.fn(() =>
@@ -15,7 +14,7 @@ describe('User Info Page', () => {
 						lastname: 'llouisp',
 						email: 'example@example.com',
 						username: 'llouisp',
-					} as UserDTO),
+					}),
 			} as Response)
 		) as jest.Mock
 	})
