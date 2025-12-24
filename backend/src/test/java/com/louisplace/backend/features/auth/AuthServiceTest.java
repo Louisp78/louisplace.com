@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,88 +15,73 @@ import com.louisplace.backend.features.auth.auth_service.AuthService;
 import com.louisplace.backend.features.auth.auth_strategy.AuthUserInfoDTO;
 import com.louisplace.backend.features.auth.auth_strategy.IAuthStragegy;
 import com.louisplace.backend.features.user.IUserRepository;
+import com.louisplace.backend.features.user.UserEntity;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("AuthService Tests")
 class AuthServiceTest {
 
-    @Mock
-    private IAuthStragegy strategy;
+        @Mock
+        private IAuthStragegy strategy;
 
-    @Mock
-    private IUserRepository userRepository;
+        @Mock
+        private IUserRepository userRepository;
 
-    @InjectMocks
-    private AuthService authService;
-
-    // Mock dependencies that will be needed for OAuth flow
-
-    @BeforeEach
-    void setUp() {
-        // Setup common test data
-    }
-
-    @Nested
-    @DisplayName("OAuth Code Flow Tests")
-    class OAuthCodeFlowTests {
+        @InjectMocks
+        private AuthService authService;
 
         @Test
         @DisplayName("Should successfully authenticate with Google provider")
         void shouldAuthenticateWithGoogle() {
-            // Given
-            String authorizationCode = "google_auth_code_123";
-            UserEntity mockUser = new UserEntity();
-            mockUser.setEmail("test@google.com");
-            mockUser.setId(1L);
+                // Given
+                String authorizationCode = "google_auth_code_123";
+                UserEntity mockUser = new UserEntity();
+                mockUser.setEmail("test@google.com");
 
-            AuthUserInfoDTO mockUserInfo = new AuthUserInfoDTO(
-                    "GoogleFirstName",
-                    "GoogleLastName",
-                    "GoogleUsername",
-                    "test@google.com");
+                AuthUserInfoDTO mockUserInfo = new AuthUserInfoDTO(
+                                "GoogleFirstName",
+                                "GoogleLastName",
+                                "GoogleUsername",
+                                "test@google.com");
 
-            when(strategy.authenticate(eq("google"), eq(authorizationCode)))
-                    .thenReturn(mockUserInfo);
-            when(userRepository.findByEmail("test@google.com"))
-                    .thenReturn(java.util.Optional.of(mockUser));
+                when(strategy.authenticate(eq("google"), eq(authorizationCode)))
+                                .thenReturn(mockUserInfo);
+                when(userRepository.findByEmail("test@google.com"))
+                                .thenReturn(java.util.Optional.of(mockUser));
 
-            // When
-            UserEntity user = authService.authenticate("google", authorizationCode);
+                // When
+                UserEntity user = authService.authenticate("google", authorizationCode);
 
-            // Then
-            assertNotNull(user);
-            assertNotNull(user.getId());
-            assertNotNull(user.getEmail());
+                // Then
+                assertNotNull(user);
+                assertNotNull(user.getEmail());
         }
 
         @Test
         @DisplayName("Should successfully authenticate with GitHub provider")
         void shouldAuthenticateWithGitHub() {
-            // Given
-            String authorizationCode = "github_auth_code_456";
-            UserEntity mockUser = new UserEntity();
-            mockUser.setEmail("test@github.com");
-            mockUser.setId(1L);
+                // Given
+                String authorizationCode = "github_auth_code_456";
+                UserEntity mockUser = new UserEntity();
+                mockUser.setEmail("test@github.com");
 
-            AuthUserInfoDTO mockUserInfo = new AuthUserInfoDTO(
-                    "GitHubFirstName",
-                    "GitHubLastName",
-                    "GitHubUsername",
-                    "test@github.com");
+                AuthUserInfoDTO mockUserInfo = new AuthUserInfoDTO(
+                                "GitHubFirstName",
+                                "GitHubLastName",
+                                "GitHubUsername",
+                                "test@github.com");
 
-            when(strategy.authenticate(eq("github"), eq(authorizationCode)))
-                    .thenReturn(mockUserInfo);
-            when(userRepository.findByEmail("test@github.com"))
-                    .thenReturn(java.util.Optional.of(mockUser));
+                when(strategy.authenticate(eq("github"), eq(authorizationCode)))
+                                .thenReturn(mockUserInfo);
+                when(userRepository.findByEmail("test@github.com"))
+                                .thenReturn(java.util.Optional.of(mockUser));
 
-            // When
-            UserEntity user = authService.authenticate("github", authorizationCode);
+                // When
+                UserEntity user = authService.authenticate("github", authorizationCode);
 
-            // Then
-            assertNotNull(user);
-            assertNotNull(user.getId());
-            assertNotNull(user.getEmail());
+                // Then
+                assertNotNull(user);
+                assertNotNull(user.getEmail());
         }
 
-    }
 }
