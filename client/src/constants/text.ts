@@ -14,6 +14,10 @@ const TEXT = {
 		url: 'https://github.com/Louisp78/louisplace.com',
 		iconAlt: 'GitHub Logo',
 	},
+	userInfoPage: {
+		successUpdate: 'Profile updated successfully!',
+		errorUpdate: 'Failed to update profile.',
+	},
 }
 
 export default TEXT
