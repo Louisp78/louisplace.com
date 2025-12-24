@@ -1,29 +1,31 @@
 package com.louisplace.backend.features.user;
 
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.webclient.test.autoconfigure.AutoConfigureWebClient;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.louisplace.backend.features.auth.session_service.SessionService;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureWebClient
+@ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
 
-    UserController userController;
+    @Mock
+    UserService userService;
 
-    public UserControllerTest() {
-        this.userController = new UserController();
-    }
+    @Mock
+    SessionService sessionService;
+
+    @InjectMocks
+    UserController userController;
 
     @Test
     @DisplayName("should expose get current user profile endpoint")
@@ -34,14 +36,21 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("should get current user profile endpoint being protected according to user identity")
+    @DisplayName("should reject get current user profile when unauthenticated")
     void shouldGetUserProfileEndpointProtected() {
+        when(sessionService.getPrincipal()).thenReturn(null);
+
+        ResponseEntity<UserDTO> response = userController.getUserInfos();
+
+        Assertions.assertEquals(403, response.getStatusCode().value());
     }
 
     @Test
-    @DisplayName("should expose update current user profile endpoint")
+    @DisplayName("should update current user profile given valid data for authenticated user")
     void shouldExposeUpdateUserProfileEndpoint() {
         UserUpdateDTO updateUserDto = new UserUpdateDTO("First", "Last", "username", "email@example.com");
+
+        when(sessionService.getPrincipal()).thenReturn("email@example.com");
 
         ResponseEntity<UserDTO> response = userController.updateUserInfos(updateUserDto);
 
@@ -50,12 +59,15 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("should update current user profile endpoint being protected according to user identity")
-    void shouldUpdateUserProfileEndpointProtected(@Autowired MockMvc mvc) throws Exception {
+    @DisplayName("should reject update current user profile endpoint for unauthenticated user")
+    void shouldUpdateUserProfileEndpointProtected() {
+        UserUpdateDTO updateUserDto = new UserUpdateDTO("First", "Last", "username", "email@example.com");
 
-        // use mockmvc with security context to test protection
-        mvc.perform(MockMvcRequestBuilders.put("/users/me").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+        when(sessionService.getPrincipal()).thenReturn(null);
+
+        ResponseEntity<UserDTO> response = userController.updateUserInfos(updateUserDto);
+
+        Assertions.assertEquals(403, response.getStatusCode().value());
     }
 
 }
