@@ -44,7 +44,7 @@ public class UserServiceTest {
                     .thenReturn(java.util.Optional.of(mockUser));
 
             // When
-            UserEntity user = userService.getUserInfo();
+            UserEntity user = userService.getUserInfo(email);
 
             // Then
             assertNotNull(user);
