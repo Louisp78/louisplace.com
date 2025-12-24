@@ -1,4 +1,4 @@
-package com.louisplace.backend.features.auth;
+package com.louisplace.backend.features.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDTO {
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String username;
     private String email;
 }

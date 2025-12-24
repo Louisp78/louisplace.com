@@ -1,4 +1,4 @@
-package com.louisplace.backend.features.auth;
+package com.louisplace.backend.features.user;
 
 import java.io.Serializable;
 
@@ -18,8 +18,18 @@ public class UserEntity implements Serializable {
 
     @Setter
     @Getter
-    @Column(nullable = false)
-    private String name;
+    @Column
+    private String firstName;
+
+    @Setter
+    @Getter
+    @Column
+    private String lastName;
+
+    @Setter
+    @Getter
+    @Column(unique = true)
+    private String username;
 
     @Setter
     @Getter
