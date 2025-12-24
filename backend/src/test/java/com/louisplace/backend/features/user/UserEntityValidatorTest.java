@@ -14,11 +14,12 @@ public class UserEntityValidatorTest {
     }
 
     @Test
-    @DisplayName("should email valid when classic format")
+    @DisplayName("should name valid when fields are well filled")
     void shouldHaveFieldsWellValidated() {
-        String email = "example@example.com";
+        String firstName = "e";
         UserEntity user = new UserEntity();
-        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName("x");
 
         boolean isValid = validator.validateFields(user);
 
@@ -26,11 +27,12 @@ public class UserEntityValidatorTest {
     }
 
     @Test
-    @DisplayName("should email invalid when missing at symbol")
-    void shouldInvalidateEmailWhenMissingAtSymbol() {
-        String email = "exampleexample.com";
+    @DisplayName("should name invalid when null")
+    void shouldHaveNullNameInvalidated() {
+        String firstName = null;
         UserEntity user = new UserEntity();
-        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName("x");
 
         boolean isValid = validator.validateFields(user);
 
@@ -38,23 +40,12 @@ public class UserEntityValidatorTest {
     }
 
     @Test
-    @DisplayName("should email invalid when missing domain")
-    void shouldInvalidateEmailWhenMissingDomain() {
-        String email = "example@.com";
+    @DisplayName("should name invalid when empty")
+    void shouldHaveEmptyNameInvalidated() {
+        String firstName = "";
         UserEntity user = new UserEntity();
-        user.setEmail(email);
-
-        boolean isValid = validator.validateFields(user);
-
-        assert (!isValid);
-    }
-
-    @Test
-    @DisplayName("should email invalid when missing extension")
-    void shouldInvalidateEmailWhenMissingExtension() {
-        String email = "example@example.";
-        UserEntity user = new UserEntity();
-        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName("x");
 
         boolean isValid = validator.validateFields(user);
 

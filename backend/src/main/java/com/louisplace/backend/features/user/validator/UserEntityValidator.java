@@ -8,11 +8,11 @@ import com.louisplace.backend.features.user.UserEntity;
 public class UserEntityValidator implements IUserEntityValidator {
 
     public boolean validateFields(UserEntity user) {
-        return validateEmail(user.getEmail());
+        return validateNames(user.getFirstName()) &&
+                validateNames(user.getLastName());
     }
 
-    private boolean validateEmail(String email) {
-        return true;
+    private boolean validateNames(String name) {
+        return name != null && !name.isEmpty();
     }
-
 }
