@@ -1,10 +1,9 @@
 package com.louisplace.backend.features.auth.auth_service;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
 import com.louisplace.backend.features.auth.UserEntity;
+import com.louisplace.backend.features.auth.auth_strategy.AuthUserInfoDTO;
 import com.louisplace.backend.features.auth.auth_strategy.IAuthStragegy;
 import com.louisplace.backend.features.user.IUserRepository;
 
@@ -21,17 +20,21 @@ public class AuthService implements IAuthProvider {
 
     @Override
     public UserEntity authenticate(String identifier, String credential) {
-        Map<String, Object> userInfo = strategy.authenticate(identifier, credential);
+        AuthUserInfoDTO userInfo = strategy.authenticate(identifier, credential);
 
-        String name = (String) userInfo.get("name");
-        String email = (String) userInfo.get("email");
+        String firstName = userInfo.getFirstName();
+        String lastName = userInfo.getLastName();
+        String username = userInfo.getUsername();
+        String email = userInfo.getEmail();
         UserEntity user = userRepository.findByEmail(email)
                 .orElseGet(() -> {
                     UserEntity newUser = new UserEntity();
-                    newUser.setName(name);
+                    newUser.setFirstName(firstName);
+                    newUser.setLastName(lastName);
+                    newUser.setUsername(username);
                     newUser.setEmail(email);
-                    userRepository.save(newUser);
-                    return newUser;
+                    UserEntity savedUser = userRepository.save(newUser);
+                    return savedUser;
                 });
 
         return user;
