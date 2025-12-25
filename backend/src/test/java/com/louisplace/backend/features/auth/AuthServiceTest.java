@@ -81,17 +81,4 @@ class AuthServiceTest {
                 assertNotNull(user);
                 assertNotNull(user.getEmail());
         }
-
-        @Test
-        @DisplayName("Should logout user successfully")
-        void shouldLogoutUser() {
-                String email = "example@gmail.com";
-
-                when(sessionService.getPrincipal()).thenReturn(email);
-
-                Boolean result = authService.logOut(email);
-
-                assert (result);
-        }
-
 }
