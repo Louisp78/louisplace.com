@@ -35,14 +35,12 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getUserInfos() {
         String email = sessionService.getPrincipal();
-        UserEntity user = userService.getUserInfo(email);
+        UserEntity user = userService.getUserInfo(email).orElse(null);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
 
-        UserDTO userDTO = new UserDTO(user);
-
-        return ResponseEntity.ok().body(userDTO);
+        return ResponseEntity.ok().body(new UserDTO(user));
     }
 
 }

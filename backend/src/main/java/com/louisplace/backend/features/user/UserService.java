@@ -17,8 +17,8 @@ public class UserService implements IUserService {
         this.userEntityValidator = userEntityValidator;
     }
 
-    public UserEntity getUserInfo(String identifier) {
-        UserEntity user = userRepository.findByEmail(identifier).orElse(null);
+    public Optional<UserEntity> getUserInfo(String identifier) {
+        Optional<UserEntity> user = userRepository.findByEmail(identifier);
         return user;
     }
 
