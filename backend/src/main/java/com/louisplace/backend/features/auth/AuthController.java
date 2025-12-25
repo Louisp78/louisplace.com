@@ -16,7 +16,6 @@ import com.louisplace.backend.features.user.UserEntity;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/auth")
@@ -47,10 +46,9 @@ public class AuthController {
         }
 
         @PostMapping("/logout")
-        public String postMethodName(@RequestBody String entity) {
-                // TODO: process POST request
-
-                return entity;
+        public ResponseEntity<String> postMethodName() {
+                authService.logout();
+                return ResponseEntity.ok("Logged out successfully");
         }
 
 }

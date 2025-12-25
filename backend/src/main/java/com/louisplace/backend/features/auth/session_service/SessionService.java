@@ -29,4 +29,10 @@ public class SessionService implements ISessionProvider {
         }
         return (String) context.getAuthentication().getPrincipal();
     }
+
+    @Override
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
+
 }
