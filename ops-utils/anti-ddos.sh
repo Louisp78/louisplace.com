@@ -1,15 +1,14 @@
 sudo apt update
-sudo apt install -y ufw fail2ban
+sudo apt install fail2ban
 
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 
 sudo ufw allow ssh
-sudo ufw allow http
-sudo ufw allow https
+sudo ufw deny 443
+for ip in $(curl https://www.cloudflare.com/ips-v4); do sudo ufw allow from $ip to any port 443 proto tcp; done
 
 sudo ufw enable
 
-# Enable SYN cookies to help mitigate SYN flood attacks
 echo "net.ipv4.tcp_syncookies = 1" >> /etc/sysctl.conf
 sysctl -p
