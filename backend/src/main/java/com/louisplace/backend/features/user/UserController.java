@@ -24,7 +24,12 @@ public class UserController {
     @PutMapping("/me")
     public ResponseEntity<UserDTO> updateUserInfos(UserUpdateDTO dataToUpdate) {
         String email = sessionService.getPrincipal();
-        return ResponseEntity.ok().build();
+        UserEntity user = userService.updateUserInfo(email, dataToUpdate).orElse(null);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(new UserDTO(user));
     }
 
     @GetMapping("/me")

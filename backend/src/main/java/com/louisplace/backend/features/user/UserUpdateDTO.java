@@ -1,11 +1,13 @@
 package com.louisplace.backend.features.user;
 
+import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class UserUpdateDTO {
-    private String firstName;
-    private String lastName;
+    private Optional<String> firstName;
+    private Optional<String> lastName;
 }

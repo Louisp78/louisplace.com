@@ -1,5 +1,7 @@
 package com.louisplace.backend.features.user;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.louisplace.backend.features.user.validator.UserEntityValidator;
@@ -20,16 +22,21 @@ public class UserService implements IUserService {
         return user;
     }
 
-    public UserEntity updateUserInfo(UserUpdateDTO dataToUpdate, String identifier) {
-        UserEntity user = this.getUserInfo(identifier);
-        if (user == null) {
-            return null;
+    public Optional<UserEntity> updateUserInfo(String identifier, UserUpdateDTO dataToUpdate) {
+        Optional<UserEntity> optUser = this.getUserInfo(identifier);
+        if (optUser.isEmpty()) {
+            return Optional.empty();
         }
 
-        if (!userEntityValidator.validateFields(user)) {
-            return null;
+        UserEntity userEntity = optUser.get();
+        if (!userEntityValidator.validateFields(userEntity)) {
+            return Optional.empty();
         }
-        return new UserEntity();
+        dataToUpdate.getFirstName().ifPresent(userEntity::setFirstName);
+        dataToUpdate.getLastName().ifPresent(userEntity::setLastName);
+
+        UserEntity savedUser = userRepository.save(userEntity);
+        return Optional.of(savedUser);
     }
 
 }
