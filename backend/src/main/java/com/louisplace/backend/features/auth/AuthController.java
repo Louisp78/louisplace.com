@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.louisplace.backend.features.auth.auth_service.AuthService;
 import com.louisplace.backend.features.auth.session_service.SessionService;
 import com.louisplace.backend.features.user.UserDTO;
+import com.louisplace.backend.features.user.UserEntity;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/auth")
@@ -40,8 +42,7 @@ public class AuthController {
                                 HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
                                 securityContext);
 
-                UserDTO userDTO = new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(),
-                                user.getEmail());
+                UserDTO userDTO = new UserDTO(user);
                 return ResponseEntity.ok(userDTO);
         }
 }

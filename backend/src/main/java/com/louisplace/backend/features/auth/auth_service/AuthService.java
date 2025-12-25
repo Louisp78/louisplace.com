@@ -2,10 +2,10 @@ package com.louisplace.backend.features.auth.auth_service;
 
 import org.springframework.stereotype.Service;
 
-import com.louisplace.backend.features.auth.UserEntity;
 import com.louisplace.backend.features.auth.auth_strategy.AuthUserInfoDTO;
 import com.louisplace.backend.features.auth.auth_strategy.IAuthStragegy;
 import com.louisplace.backend.features.user.IUserRepository;
+import com.louisplace.backend.features.user.UserEntity;
 
 @Service
 public class AuthService implements IAuthProvider {
