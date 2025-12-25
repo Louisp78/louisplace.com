@@ -45,4 +45,12 @@ public class AuthController {
                 UserDTO userDTO = new UserDTO(user);
                 return ResponseEntity.ok(userDTO);
         }
+
+        @PostMapping("/logout")
+        public String postMethodName(@RequestBody String entity) {
+                // TODO: process POST request
+
+                return entity;
+        }
+
 }
