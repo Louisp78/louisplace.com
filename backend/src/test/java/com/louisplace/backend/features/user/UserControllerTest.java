@@ -49,7 +49,7 @@ public class UserControllerTest {
     @Test
     @DisplayName("should update current user profile given valid data for authenticated user")
     void shouldExposeUpdateUserProfileEndpoint() {
-        UserUpdateDTO updateUserDto = new UserUpdateDTO("First", "Last", "username", "email@example.com");
+        UserUpdateDTO updateUserDto = new UserUpdateDTO("First", "Last");
 
         when(sessionService.getPrincipal()).thenReturn("email@example.com");
 
@@ -62,7 +62,7 @@ public class UserControllerTest {
     @Test
     @DisplayName("should reject update current user profile endpoint for unauthenticated user")
     void shouldUpdateUserProfileEndpointProtected() {
-        UserUpdateDTO updateUserDto = new UserUpdateDTO("First", "Last", "username", "email@example.com");
+        UserUpdateDTO updateUserDto = new UserUpdateDTO("First", "Last");
 
         when(sessionService.getPrincipal()).thenReturn(null);
 
