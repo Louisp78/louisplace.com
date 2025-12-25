@@ -9,14 +9,12 @@ public class UserDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private String username;
     private String email;
 
     public UserDTO(UserEntity userEntity) {
         this.id = userEntity.getId();
         this.firstName = userEntity.getFirstName();
         this.lastName = userEntity.getLastName();
-        this.username = userEntity.getUsername();
         this.email = userEntity.getEmail();
     }
 }

@@ -28,11 +28,6 @@ public class UserEntity implements Serializable {
 
     @Setter
     @Getter
-    @Column(unique = true)
-    private String username;
-
-    @Setter
-    @Getter
     @Column(nullable = false, unique = true)
     private String email;
 }
