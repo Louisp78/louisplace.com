@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import crypto from 'crypto'
 import IOAuthService from './oauth.service.interface'
-import { AuthProvider } from './auth-provider.enum'
+import { AuthProviderEnum } from './auth-provider.enum'
 
 const STATE_COOKIE_MAX_AGE = 10 * 60
 const STATE_COOKIE_KEY = 'oauth_state'
@@ -27,17 +27,17 @@ export default class OAuthService implements IOAuthService {
 		return result
 	}
 
-	public async getAuthCodeUrlWithParams(provider: AuthProvider): Promise<string> {
+	public async getAuthCodeUrlWithParams(provider: AuthProviderEnum): Promise<string> {
 		const params = await this.getParams(provider)
 		return `${OAuthService.getAuthBaseUrl(provider)}?${params.toString()}`
 	}
 
-	private async getParams(provider: AuthProvider): Promise<URLSearchParams> {
+	private async getParams(provider: AuthProviderEnum): Promise<URLSearchParams> {
 		const state = this.generateState()
 		await this.storeState(state)
 
 		switch (provider) {
-			case AuthProvider.GOOGLE:
+			case AuthProviderEnum.GOOGLE:
 				return new URLSearchParams({
 					client_id: process.env.GOOGLE_ID || '',
 					redirect_uri: `${process.env.PUBLIC_URL}/api/auth/google/callback`,
@@ -45,7 +45,7 @@ export default class OAuthService implements IOAuthService {
 					scope: GOOGLE_SCOPES.join(' '),
 					state,
 				})
-			case AuthProvider.GITHUB:
+			case AuthProviderEnum.GITHUB:
 				return new URLSearchParams({
 					client_id: process.env.GITHUB_ID || '',
 					redirect_uri: `${process.env.PUBLIC_URL}/api/auth/github/callback`,
@@ -56,11 +56,11 @@ export default class OAuthService implements IOAuthService {
 		}
 	}
 
-	private static getAuthBaseUrl(provider: AuthProvider): string {
+	private static getAuthBaseUrl(provider: AuthProviderEnum): string {
 		switch (provider) {
-			case AuthProvider.GOOGLE:
+			case AuthProviderEnum.GOOGLE:
 				return GOOGLE_AUTH_URL
-			case AuthProvider.GITHUB:
+			case AuthProviderEnum.GITHUB:
 				return GITHUB_AUTH_URL
 		}
 	}

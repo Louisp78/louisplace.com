@@ -24,7 +24,10 @@ public class OAuthStrategy implements IAuthStragegy {
         private static final String PARAM_GRANT_TYPE = "grant_type";
         private static final String GRANT_TYPE_AUTH_CODE = "authorization_code";
         private static final String FIELD_ACCESS_TOKEN = "access_token";
-        private static final String FIELD_NAME = "name";
+        private static final String FIELD_FIRST_NAME = "first_name";
+        private static final String FIELD_LAST_NAME = "last_name";
+        private static final String FIELD_USERNAME = "username";
+
         private static final String FIELD_EMAIL = "email";
 
         private final WebClient webClient;
@@ -36,7 +39,7 @@ public class OAuthStrategy implements IAuthStragegy {
         }
 
         @Override
-        public Map<String, Object> authenticate(String identifier, String credential) {
+        public AuthUserInfoDTO authenticate(String identifier, String credential) {
                 OAuthProviderEnum provider = OAuthProviderEnum.fromString(identifier);
                 MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
                 formData.add(PARAM_CODE, credential);
@@ -63,9 +66,12 @@ public class OAuthStrategy implements IAuthStragegy {
                                 })
                                 .block();
 
-                return Map.of(
-                                FIELD_NAME, userInfo.get(FIELD_NAME),
-                                FIELD_EMAIL, userInfo.get(FIELD_EMAIL));
+                AuthUserInfoDTO authUserInfo = new AuthUserInfoDTO(
+                                (String) userInfo.get(FIELD_FIRST_NAME),
+                                (String) userInfo.get(FIELD_LAST_NAME),
+                                (String) userInfo.get(FIELD_USERNAME),
+                                (String) userInfo.get(FIELD_EMAIL));
+                return authUserInfo;
         }
 
         @Override

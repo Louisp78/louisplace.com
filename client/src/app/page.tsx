@@ -7,9 +7,6 @@ export default async function PostsPage() {
 
 	return (
 		<main className="flex-1 p-4 md:p-5">
-			<div className="flex w-screen justify-center md:justify-start">
-				<h1 className="pb-5 font-[Syne] text-4xl font-bold">Louis&apos; Blog</h1>
-			</div>
 			<ul className="grid grid-cols-1 gap-6 overflow-visible pt-5 pb-6 sm:grid-cols-2 lg:grid-cols-3">
 				{postMetadata.map((metadata: PostMetadata) => (
 					<li key={metadata.slug}>

@@ -1,5 +1,8 @@
+import AppBar from '@/components/app-bar'
 import Footer from '@/components/footer'
+import QueryClientCustomProvider from '@/config/query-client-custom-provider'
 import TEXT from '@/constants/text'
+import { AuthProvider } from '@/features/auth/index.client'
 import fontService from '@/font/font.service'
 import type { Metadata } from 'next'
 import './globals.css'
@@ -15,14 +18,19 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html
-			lang="en"
-			className={`${fontService.fontBase.className} ${fontService.fontTitle.variable}`}
-		>
-			<body className={`overflow-y-auto antialiased`}>
-				<div className="min-h-screen">{children}</div>
-				<Footer />
-			</body>
-		</html>
+		<QueryClientCustomProvider>
+			<AuthProvider>
+				<html
+					lang="en"
+					className={`${fontService.fontBase.className} ${fontService.fontTitle.variable}`}
+				>
+					<body className={`overflow-y-auto antialiased`}>
+						<AppBar />
+						<div className="min-h-screen pt-16">{children}</div>
+						<Footer />
+					</body>
+				</html>
+			</AuthProvider>
+		</QueryClientCustomProvider>
 	)
 }
