@@ -1,10 +1,11 @@
+import AppBar from '@/components/app-bar'
 import Footer from '@/components/footer'
+import QueryClientCustomProvider from '@/config/query-client-custom-provider'
 import TEXT from '@/constants/text'
+import { AuthProvider } from '@/features/auth/index.client'
 import fontService from '@/font/font.service'
 import type { Metadata } from 'next'
 import './globals.css'
-import GoogleLoginIcon from '@/components/google-login-icon'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
 	title: TEXT.metadata.title,
@@ -17,15 +18,19 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html
-			lang="en"
-			className={`${fontService.fontBase.className} ${fontService.fontTitle.variable}`}
-		>
-			<body className={`overflow-y-auto antialiased`}>
+		<QueryClientCustomProvider>
+			<AuthProvider>
+				<html
+					lang="en"
+					className={`${fontService.fontBase.className} ${fontService.fontTitle.variable}`}
+				>
+					<body className={`overflow-y-auto antialiased`}>
 						<AppBar />
-				<div className="min-h-screen pt-16">{children}</div>
-				<Footer />
-			</body>
-		</html>
+						<div className="min-h-screen pt-16">{children}</div>
+						<Footer />
+					</body>
+				</html>
+			</AuthProvider>
+		</QueryClientCustomProvider>
 	)
 }
