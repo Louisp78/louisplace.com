@@ -10,6 +10,8 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 public class SecurityConfig {
+        static final int MAX_SESSION_NUMBER = 1;
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
@@ -18,12 +20,12 @@ public class SecurityConfig {
                                                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                                 .cors(cors -> cors.configure(http))
                                 .authorizeHttpRequests(auth -> auth
-
-                                                .requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui/**")
+                                                .requestMatchers("/auth/**", "/v3/api-docs/**",
+                                                                "/swagger-ui/**")
                                                 .permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(session -> session
-                                                .maximumSessions(1)
+                                                .maximumSessions(MAX_SESSION_NUMBER)
                                                 .maxSessionsPreventsLogin(false))
                                 .exceptionHandling(exception -> exception
                                                 .authenticationEntryPoint(
