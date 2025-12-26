@@ -1,4 +1,5 @@
 import { HttpStatus } from '@/utils/http-status'
+import { useAuth } from '../auth.context'
 
 describe('AuthContext', () => {
 	beforeAll(() => {})
@@ -16,11 +17,11 @@ describe('AuthContext', () => {
 					}),
 			} as Response)
 		) as jest.Mock
-		// TODO: get the useAuth hook
+		// TODO: need to use renderHook with AuthProvider
 		const { user } = useAuth()
 
 		expect(user).toBeDefined()
-		expect(user.id).toBeDefined()
+		expect(user?.id).toBeDefined()
 	})
 	test('should set user to not authenticated on logout', () => {
 		global.fetch = jest.fn(() =>
@@ -29,6 +30,7 @@ describe('AuthContext', () => {
 			} as Response)
 		) as jest.Mock
 
+		// TODO: need to use renderHook with AuthProvider
 		const { user } = useAuth()
 
 		expect(user).toBeNull()
@@ -47,6 +49,7 @@ describe('AuthContext', () => {
 			} as Response)
 		) as jest.Mock
 
+		// TODO: need to use renderHook with AuthProvider
 		const { user } = useAuth()
 
 		expect(user).toBeDefined()
