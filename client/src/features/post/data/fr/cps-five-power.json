@@ -3,7 +3,7 @@
 		"title": "Le Système de Distribution d'Énergie",
 		"summary": "Comment allumer et éteindre un système qui consomme des dizaines d'ampères sans détruire un simple interrupteur au passage. Le relais MOSFET du CPS Five, son dissipateur en aluminium et son intégration au cœur du drone.",
 		"image": {
-			"src": "/cps-five-power-1.jpg",
+			"src": "/cps-five-power/cps-five-power-1.jpg",
 			"width": 1600,
 			"height": 1200,
 			"alt": "Module de commutation MOSFET du CPS Five monté sur sa plaque d'aluminium"
@@ -43,7 +43,7 @@
 		{
 			"type": "image",
 			"data": {
-				"src": "/cps-five-power-3.jpg",
+				"src": "/cps-five-power/cps-five-power-3.jpg",
 				"width": 1600,
 				"height": 1200,
 				"alt": "La plaque d'aluminium découpée et percée, prête à accueillir le relais",
@@ -59,8 +59,8 @@
 		{
 			"type": "video",
 			"data": {
-				"src": "/cps-five-power.mp4",
-				"poster": "/cps-five-power-poster.jpg",
+				"src": "/cps-five-power/cps-five-power.mp4",
+				"poster": "/cps-five-power/cps-five-power-poster.jpg",
 				"caption": "Application de la pâte thermique sous le MOSFET, puis fixation du relais sur la plaque d'aluminium."
 			}
 		},
@@ -79,7 +79,7 @@
 		{
 			"type": "image",
 			"data": {
-				"src": "/cps-five-power-2.jpg",
+				"src": "/cps-five-power/cps-five-power-2.jpg",
 				"width": 1600,
 				"height": 1200,
 				"alt": "Le relais de puissance ajouté au circuit principal du CPS Five",

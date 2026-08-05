@@ -3,7 +3,7 @@
 		"title": "The Power Distribution System",
 		"summary": "How to switch a system that draws tens of amps on and off without frying an ordinary switch in the process. The CPS Five's MOSFET relay, its aluminium heatsink, and fitting it into the heart of the drone.",
 		"image": {
-			"src": "/cps-five-power-1.jpg",
+			"src": "/cps-five-power/cps-five-power-1.jpg",
 			"width": 1600,
 			"height": 1200,
 			"alt": "The CPS Five's MOSFET switching module mounted on its aluminium plate"
@@ -43,7 +43,7 @@
 		{
 			"type": "image",
 			"data": {
-				"src": "/cps-five-power-3.jpg",
+				"src": "/cps-five-power/cps-five-power-3.jpg",
 				"width": 1600,
 				"height": 1200,
 				"alt": "The aluminium plate, cut and drilled, ready for the relay",
@@ -59,8 +59,8 @@
 		{
 			"type": "video",
 			"data": {
-				"src": "/cps-five-power.mp4",
-				"poster": "/cps-five-power-poster.jpg",
+				"src": "/cps-five-power/cps-five-power.mp4",
+				"poster": "/cps-five-power/cps-five-power-poster.jpg",
 				"caption": "Applying thermal paste under the MOSFET, then fixing the relay to the aluminium plate."
 			}
 		},
@@ -79,7 +79,7 @@
 		{
 			"type": "image",
 			"data": {
-				"src": "/cps-five-power-2.jpg",
+				"src": "/cps-five-power/cps-five-power-2.jpg",
 				"width": 1600,
 				"height": 1200,
 				"alt": "The power relay added to the CPS Five's main board",
