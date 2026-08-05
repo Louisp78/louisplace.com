@@ -1,0 +1,102 @@
+{
+	"metadata": {
+		"title": "Wiring It All Together",
+		"summary": "The moment the modules stop being separate parts. Fixing the MOSFET relay in the drone, tying it to the battery, wiring the LED drivers to run together, and connecting the pressure sensor to the Pixhawk.",
+		"image": {
+			"src": "/cps-five-wiring/wiring-the-fuse-with-mofset.jpg",
+			"width": 1200,
+			"height": 1600,
+			"alt": "The CPS Five's MOSFET relay wired to the fuse, with the two LED drivers mounted below"
+		},
+		"slug": "cps-five-wiring",
+		"author": "Louis Place",
+		"publishedAt": "2026-08-05T00:00:00Z",
+		"category": "Electronics",
+		"tags": ["Electronics", "Wiring", "Molex", "LED Drivers", "CPS Five", "Underwater Robotics"],
+		"estimatedReadingTimeMinutes": 3
+	},
+	"content": [
+		{
+			"type": "title",
+			"data": {
+				"text": "Wiring it all together"
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Last time, the power module was ready but on its own: a **MOSFET** relay sitting on its aluminium plate, wired up, waiting. Today was the step I mentioned at the end of the previous article: getting current to flow from one end to the other."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "I started with the mechanics. The aluminium plate fixes to the back of the drone's electronics module, screwed straight onto the structure. Pressing the heatsink against the chassis gives me a little more surface to shed heat, and above all the module stops moving."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Then the power wiring. The MOSFET's centre pin goes to the drone's fuse, and a second pin runs straight back to the battery. Two wires, and the current's path is finally closed: the battery feeds the relay, the relay feeds the rest of the drone."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Next I moved on to the **LED drivers**. They had to be soldered together so they work as one, fed from the same source and controlled together."
+			}
+		},
+		{
+			"type": "image",
+			"data": {
+				"src": "/cps-five-wiring/wiring-output-of-led-drivers.jpg",
+				"width": 1200,
+				"height": 1600,
+				"alt": "The two LED drivers wired up, their outputs joined together",
+				"caption": "The drivers linked together so they can be controlled in one go."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Once the drivers were soldered, I organised their output wires into the **Molex**. It's probably the most useful part for what comes next: every wire in its place, in the right slot, labelled."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Last step of the day: the **pressure sensor**. I connected its outputs to the Pixhawk and the Raspberry Pi. This sensor is what will give the CPS Five a sense of depth: without it, ArduSub is flying blind on the vertical axis."
+			}
+		},
+		{
+			"type": "image",
+			"data": {
+				"src": "/cps-five-wiring/connecting-pressure-sensor.jpg",
+				"width": 1200,
+				"height": 1600,
+				"alt": "The pressure sensor connected to the Pixhawk and the Raspberry Pi",
+				"caption": "The pressure sensor's outputs connected to the Pixhawk and the Raspberry Pi."
+			}
+		},
+		{
+			"type": "video",
+			"data": {
+				"src": "/cps-five-wiring/connection-pressure-sensor-video.mp4",
+				"poster": "/cps-five-wiring/connection-pressure-sensor-video-poster.jpg",
+				"caption": "Hooking the pressure sensor up to the Pixhawk."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "By the end of the session, the drone finally looks like a system rather than a collection of modules."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Next step? Plug in the Molex, power it up for the first time, and see whether the current, the light and the depth all answer the call."
+			}
+		}
+	]
+}

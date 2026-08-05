@@ -1,0 +1,102 @@
+{
+	"metadata": {
+		"title": "Tout Relier",
+		"summary": "Le moment où les modules cessent d'être des pièces séparées. Fixation du relais MOSFET dans le drone, liaison à la batterie, mise en parallèle des drivers LED et raccordement du capteur de pression au Pixhawk.",
+		"image": {
+			"src": "/cps-five-wiring/wiring-the-fuse-with-mofset.jpg",
+			"width": 1200,
+			"height": 1600,
+			"alt": "Le relais MOSFET du CPS Five câblé au fusible, avec les deux drivers LED montés dessous"
+		},
+		"slug": "cps-five-wiring",
+		"author": "Louis Place",
+		"publishedAt": "2026-08-05T00:00:00Z",
+		"category": "Electronics",
+		"tags": ["Electronics", "Wiring", "Molex", "LED Drivers", "CPS Five", "Underwater Robotics"],
+		"estimatedReadingTimeMinutes": 3
+	},
+	"content": [
+		{
+			"type": "title",
+			"data": {
+				"text": "Tout relier"
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "La dernière fois, le module de puissance était prêt mais isolé: un relais **MOSFET** posé sur sa plaque d'aluminium, câblé, en attente. Aujourd'hui, c'était l'étape que j'annonçais à la fin du précédent article: faire circuler le courant d'un bout à l'autre."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "J'ai commencé par la mécanique. La plaque d'aluminium vient se fixer à l'arrière du module électronique du drone, vissée directement sur la structure. En plaquant le dissipateur contre le châssis, je gagne encore un peu de surface pour évacuer la chaleur, et surtout le module ne bouge plus."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Ensuite, le câblage de puissance. Le pin central du MOSFET part vers le fusible du drone, et un second pin remonte directement à la batterie. Deux fils, et le chemin du courant est enfin fermé: la batterie alimente le relais, le relais alimente le reste du drone."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Puis je suis passé aux **drivers LED**. Il fallait les souder entre eux pour qu'ils travaillent de concert, alimentés par la même source et commandés ensemble."
+			}
+		},
+		{
+			"type": "image",
+			"data": {
+				"src": "/cps-five-wiring/wiring-output-of-led-drivers.jpg",
+				"width": 1200,
+				"height": 1600,
+				"alt": "Les deux drivers LED câblés, leurs sorties reliées entre elles",
+				"caption": "Les drivers reliés entre eux pour être commandés d'un seul geste."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Une fois les drivers soudés, j'ai organisé leurs fils de sortie dans le **Molex**. C'est surement la partie la plus utile pour la suite: chaque fil à sa place, dans le bon logement, repéré."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Dernière étape de la journée: le **capteur de pression**. J'ai relié ses sorties vers le Pixhawk et le Raspberry Pi. Ce capteur, c'est ce qui donnera au CPS Five la notion de profondeur: sans lui, ArduSub navigue à l'aveugle sur l'axe vertical."
+			}
+		},
+		{
+			"type": "image",
+			"data": {
+				"src": "/cps-five-wiring/connecting-pressure-sensor.jpg",
+				"width": 1200,
+				"height": 1600,
+				"alt": "Le capteur de pression relié au Pixhawk et au Raspberry Pi",
+				"caption": "Les sorties du capteur de pression reliées au Pixhawk et au Raspberry Pi."
+			}
+		},
+		{
+			"type": "video",
+			"data": {
+				"src": "/cps-five-wiring/connection-pressure-sensor-video.mp4",
+				"poster": "/cps-five-wiring/connection-pressure-sensor-video-poster.jpg",
+				"caption": "Le raccordement du capteur de pression au Pixhawk."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "À la fin de la séance, le drone ressemble enfin à un système et plus à une collection de modules."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "La prochaine étape? Connecter le Molex, mettre sous tension pour la première fois, et voir si le courant, la lumière et la profondeur répondent tous les trois à l'appel."
+			}
+		}
+	]
+}
