@@ -1,0 +1,74 @@
+{
+	"metadata": {
+		"title": "Fire!",
+		"summary": "Connecting the battery to the rest of the circuit. A few multimeter readings, a KiCad schematic, then sparks, thick white smoke and an ESC glowing lava red.",
+		"image": {
+			"src": "/cps-five-fire/electronics-module.jpg",
+			"width": 1200,
+			"height": 1600,
+			"alt": "The CPS Five's electronics module on the bench: the Pixhawk, the Raspberry Pi and the ESC stack with their wire harness"
+		},
+		"slug": "cps-five-fire",
+		"author": "Louis Place",
+		"publishedAt": "2026-09-03T00:00:00Z",
+		"category": "Electronics",
+		"tags": [
+			"Electronics",
+			"KiCad",
+			"Short Circuit",
+			"ESC",
+			"LED Drivers",
+			"CPS Five",
+			"Underwater Robotics"
+		],
+		"estimatedReadingTimeMinutes": 3
+	},
+	"content": [
+		{
+			"type": "title",
+			"data": {
+				"text": "Fire!"
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Today I decided to take on a crucial step of this build, namely connecting the battery to the rest of the circuit. Having a few misgivings, I first decided to take some readings with a multimeter to make sure all the components were still intact and working after several weeks of assembly."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "After a fairly encouraging result with no anomaly found on any of the circuit's components, I set out to also draw a little schematic of the electrical circuit in **KiCad** to see where I stand. For your viewing pleasure, here it is (far from perfect):"
+			}
+		},
+		{
+			"type": "image",
+			"data": {
+				"src": "/cps-five-fire/kicad-schematic.png",
+				"width": 1336,
+				"height": 1574,
+				"alt": "KiCad schematic of the CPS Five's electrical circuit: battery, IRF1404 MOSFET, 60A fuse, Pixhawk power module, two LED drivers and the ESCs",
+				"caption": "The circuit schematic in KiCad, far from perfect."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "This schematic lets me get a mental picture of the circuit and, at the same time, it's a valuable resource I can hand to the AI so it can assist me more during this build."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Finally the fateful moment where I decide to connect this battery. The junction to link it to the 2 big parts of the circuit (the part with the ESCs and the one with the LED drivers) is the battery wire to be joined with the LED drivers' wire and the ESCs' wire. In short a three-way junction which, as soon as I brought the battery wire close, started throwing sparks. I pressed the battery wire onto the 2 other wires and then I notice thick white smoke coming out under the module around the LED drivers… I pull the connection apart almost instantly and survey the damage. My mistake after that was surely wanting to try the experiment again, convincing myself it was just a bad join of the three wires on my part… Big mistake, this time it's the central ESC that heats up and starts glowing lava red in its middle, with smoke again. One of the solder joints pops off the ESC… I'm demoralised…"
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "After that, I decided to stop the carnage, go back to theory and plan the investigation that will let me find the culprit behind this short circuit. Next step, desolder the components and check them one by one… More in the next episode, I hope to finish this game of electrical Cluedo so I can soon move on to the epoxy that will seal the electronics inside a watertight tube."
+			}
+		}
+	]
+}

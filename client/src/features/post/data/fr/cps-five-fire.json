@@ -1,0 +1,74 @@
+{
+	"metadata": {
+		"title": "Au feu !",
+		"summary": "Le branchement de la batterie au reste du circuit. Quelques mesures au multimètre, un schéma KiCad, puis des étincelles, de la fumée blanche et un ESC qui vire au rouge lave.",
+		"image": {
+			"src": "/cps-five-fire/electronics-module.jpg",
+			"width": 1200,
+			"height": 1600,
+			"alt": "Le module électronique du CPS Five posé sur l'établi: le Pixhawk, le Raspberry Pi et l'empilement des ESCs avec leur faisceau de fils"
+		},
+		"slug": "cps-five-fire",
+		"author": "Louis Place",
+		"publishedAt": "2026-09-03T00:00:00Z",
+		"category": "Electronics",
+		"tags": [
+			"Electronics",
+			"KiCad",
+			"Short Circuit",
+			"ESC",
+			"LED Drivers",
+			"CPS Five",
+			"Underwater Robotics"
+		],
+		"estimatedReadingTimeMinutes": 3
+	},
+	"content": [
+		{
+			"type": "title",
+			"data": {
+				"text": "Au feu !"
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Aujourd'hui j'ai décidé de réaliser une étape cruciale de cette construction, à savoir brancher la batterie au reste du circuit. Ayant quelques appréhensions j'ai d'abord décidé d'effectuer quelques mesures en utilisant un multimètre afin de m'assurer que tous les composants étaient encore intacts et fonctionnels après ce montage de plusieurs semaines."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Après un résultat assez encourageant avec aucune anomalie détectée sur aucun des composants du circuit, je me suis mis en quête de réaliser aussi un petit schéma du circuit électrique sur **KiCad** afin de voir où j'en suis. Pour votre plus grand plaisir le voici (loin d'être parfait) :"
+			}
+		},
+		{
+			"type": "image",
+			"data": {
+				"src": "/cps-five-fire/kicad-schematic.png",
+				"width": 1336,
+				"height": 1574,
+				"alt": "Schéma KiCad du circuit électrique du CPS Five: batterie, MOSFET IRF1404, fusible 60A, module de puissance Pixhawk, deux drivers LED et les ESCs",
+				"caption": "Le schéma du circuit sur KiCad, loin d'être parfait."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Ce schéma me permet ainsi de pouvoir obtenir une image mentale du circuit et par la même occasion, il s'agit d'une ressource précieuse que je suis en mesure de donner à l'IA afin qu'elle m'assiste davantage durant ce montage."
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Finalement le moment fatidique où je décide de relier cette batterie. La jonction afin de la relier aux 2 grosses parties du circuit (partie avec les ESCs et avec les LED drivers) c'est le fil de la batterie à relier avec le fil des LED drivers et des ESCs. En bref une jonction tripartite qui dès que j'approche le fil de la batterie a commencé à faire des étincelles. J'ai plaqué le fil de la batterie sur les 2 autres fils et là je remarque un dégagement de fumée épaisse et blanche sous le module au niveau des LED drivers… je retire presque instantanément la liaison et constate les dégâts. Mon erreur après ça fut sûrement de vouloir retenter l'expérience me persuadant qu'il ne s'agissait là juste d'une mauvaise liaison des trois fils de ma part… Grave erreur, cette fois c'est l'ESC central qui chauffe et se met à afficher une couleur rouge lave en son centre accompagnée encore de fumée. Une des soudures saute sur l'ESC… Je suis démoralisé…"
+			}
+		},
+		{
+			"type": "spaced-content",
+			"data": {
+				"content": "Après ça, j'ai décidé d'arrêter ce carnage et de repasser au théorique et de planifier l'enquête qui me permettra de découvrir le coupable de ce court-circuit. Prochaine étape désouder les composants et les vérifier un à un… Suite au prochain épisode, j'espère réussir à finir cette partie de Cluedo électrique afin de passer bientôt à l'époxy qui me servira à sceller l'électronique dans un tube étanche."
+			}
+		}
+	]
+}
