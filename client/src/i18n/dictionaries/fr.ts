@@ -10,10 +10,11 @@ const fr: Dictionary = {
 			"Notes et comptes-rendus de la construction de robots sous-marins — ROV, AUV, et tout ce qu'il faut pour qu'une machine survive et fonctionne sous la surface.",
 	},
 	home: {
-		tagline: 'La robotique sous-marine, un projet à la fois.',
+		tagline: 'Un projet de robotique sous-marine',
 		intro:
-			"Je conçois et construis des robots sous-marins — ROV, AUV, ainsi que l'électronique, le logiciel de contrôle et le matériel qui les font fonctionner. C'est ici que je raconte ce que je construis, ce qui a cassé, et ce que j'ai appris.",
-		emptyState: "Pas encore d'articles — le premier compte-rendu de projet arrive bientôt.",
+			"Le changelog de la construction d'un robot sous-marin (ROV). C'est ici que je raconte ce que je construis, ce qui a cassé, et ce que j'ai appris.",
+		modelLabel: 'Dessin filaire du robot en rotation',
+		emptyState: "Pas encore d'articles, le premier compte-rendu de projet arrive bientôt.",
 	},
 	post: {
 		newBadge: 'Nouveau',

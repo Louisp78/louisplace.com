@@ -10,10 +10,11 @@ const en: Dictionary = {
 			'Notes and build logs from making underwater robots — ROVs, AUVs, and everything it takes to get a machine to survive and work below the surface.',
 	},
 	home: {
-		tagline: 'Underwater robotics, one project at a time.',
+		tagline: 'An underwater robotics project',
 		intro:
-			"I design and build underwater robots — ROVs, AUVs, along with the electronics, control software and hardware that make them run. This is where I write about what I'm building, what broke, and what I learned.",
-		emptyState: 'No articles yet — the first project log is coming soon.',
+			"The changelog of an underwater robot (ROV) build. This is where I write about what I'm building, what broke, and what I learned.",
+		modelLabel: 'Rotating wireframe drawing of the robot',
+		emptyState: 'No articles yet, the first project log is coming soon.',
 	},
 	post: {
 		newBadge: 'New',

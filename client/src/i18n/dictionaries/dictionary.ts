@@ -9,6 +9,7 @@ export interface Dictionary {
 	home: {
 		tagline: string
 		intro: string
+		modelLabel: string
 		emptyState: string
 	}
 	post: {
