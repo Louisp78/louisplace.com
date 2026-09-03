@@ -1,4 +1,5 @@
 import LanguageSwitcher from '@/components/language-switcher/language-switcher'
+import MobileNavMenu from '@/components/mobile-nav-menu/mobile-nav-menu'
 import { TransitionLink } from '@/components/transition-link/TransitionLink'
 import SPACING from '@/constants/spacing'
 import type { Locale } from '@/i18n/config'
@@ -13,14 +14,25 @@ interface AppBarProps {
 
 export default function AppBar({ locale, dict }: AppBarProps) {
 	return (
-		<header className="sticky top-0 z-50 flex items-center justify-between border-b-[0.5px] border-gray-300 bg-[var(--background)]/70 p-4 backdrop-blur-md md:px-8 md:py-5">
+		<header className="relative sticky top-0 z-50 flex items-center justify-between border-b-[0.5px] border-gray-300 bg-[var(--background)]/70 p-4 backdrop-blur-md md:px-8 md:py-5">
 			<TransitionLink href={`/${locale}`}>
-				<span className="font-[Syne] text-lg font-bold md:text-xl">{dict.brand.name}</span>
+				<span className="font-[Syne] text-base font-bold md:text-lg">
+					<span className="md:hidden">{dict.brand.shortName}</span>
+					<span className="hidden md:inline">{dict.brand.name}</span>
+				</span>
 			</TransitionLink>
+			<MobileNavMenu locale={locale} appBar={dict.appBar} github={dict.github} />
 			<div className="flex items-center gap-4 md:gap-6">
+				<span className="hidden md:inline">
+					<TransitionLink href={`/${locale}/about`}>
+						<span className="text-gray-500 hover:text-gray-900 md:text-base dark:hover:text-white">
+							{dict.appBar.about}
+						</span>
+					</TransitionLink>
+				</span>
 				<LanguageSwitcher locale={locale} label={dict.languageSwitcher.label} />
 				<a
-					className="group flex items-center gap-1.5 text-sm text-blue-700 md:text-base"
+					className="group hidden items-center gap-1.5 text-sm text-blue-700 md:flex md:text-base"
 					href={dict.github.url}
 					target="_blank"
 					rel="noopener noreferrer"

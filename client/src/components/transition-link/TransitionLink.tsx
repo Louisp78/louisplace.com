@@ -9,11 +9,12 @@ export interface TransitionLinkProps extends LinkProps {
 	href: string
 }
 
-export function TransitionLink({ children, href, ...props }: TransitionLinkProps) {
+export function TransitionLink({ children, href, onClick, ...props }: TransitionLinkProps) {
 	const router = useRouter()
 
 	async function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
 		event.preventDefault()
+		onClick?.(event)
 		const body = document.querySelector('body')
 		body?.classList.add('page-transition')
 		await new Promise((resolve) => setTimeout(resolve, 500))

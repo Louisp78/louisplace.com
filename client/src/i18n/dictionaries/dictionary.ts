@@ -1,10 +1,29 @@
 export interface Dictionary {
 	brand: {
 		name: string
+		shortName: string
 	}
 	metadata: {
 		title: string
 		description: string
+	}
+	appBar: {
+		about: string
+		navLabel: string
+		openMenu: string
+		closeMenu: string
+	}
+	about: {
+		title: string
+		intro: string
+		metadata: {
+			title: string
+			description: string
+		}
+		sections: {
+			heading: string
+			paragraphs: string[]
+		}[]
 	}
 	home: {
 		tagline: string
